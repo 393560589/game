@@ -1,0 +1,243 @@
+body {
+  background-color: #f2f2f2;
+}
+.index{
+  font-size: 0.6rem;
+  .apptool{
+    padding: 0 14px;
+    .iconfont{
+
+    }
+    height:1.25rem;
+    line-height:1.25rem;
+    background-color: #fffffa;
+    box-shadow: 0 0 2px #a5a570;
+    color: #a5a570;
+    margin: 10px 0;
+  }
+  .history{
+    background: #ffffff;
+    padding: 0 14px;
+    h2{
+      color:#3c3c3c;
+      font-size: 0.7rem;
+      line-height:1.2rem;
+      border-bottom:1px solid #eaeaea;
+    }
+    .listwrap{
+      height: 2.9rem;
+      overflow: hidden;
+      position: relative;
+      ul{
+        position: absolute;
+      }
+      li{
+        padding-bottom: 6px;
+        width: 3.65rem;
+        color: #666;
+        text-align: center;
+        overflow-x: hidden;
+        .gamelogo{
+          margin: 6px auto;
+          width: 1.4rem;
+          height: 1.4rem;
+          box-shadow: 0 0 2px #666;
+          border-radius: 2px;
+        }
+      }
+    }
+
+  }
+  .secondaryNav{
+    background-color: #fff;
+    margin-top: 10px;border-top: 1px solid #eaeaea;
+    .navSecond{
+      transition: all .3s;
+      height: 1.8rem;
+      position: relative;
+      border-bottom: 1px solid #eaeaea;
+      overflow: hidden;
+      .wrapA{
+        line-height: 1.8rem;
+        width: 25%;
+        text-align: center;
+        display: block;
+        float: left;
+        .allclass{
+          position: absolute;
+          left: 0;
+          width: 16rem;
+          display: block;
+          .allA{
+            font-size: 0.5rem;
+            width: 3.2rem;
+            display: block;
+            float: left;
+          }
+        }
+
+      }
+    }
+
+
+  }
+}
+//index 蔡果首页
+
+.theHost{
+  font-size:0.7rem;
+  .header{
+    background: #fff;
+  }
+  .hostbanner{
+    background: #393a3f;
+    height: 8rem;
+    position: relative;
+    .imgWrap{
+      width: 13rem;
+      height: 7rem;
+      box-shadow: 0 0 2px rgba(0,0,0,0.2);
+      position: absolute;
+      overflow: hidden;
+      bottom: -1rem;
+      left: 50%;
+      -webkit-transform: translateX(-50%);
+      -moz-transform: translateX(-50%);
+      -ms-transform: translateX(-50%);
+      -o-transform: translateX(-50%);
+      transform: translateX(-50%);
+      img{
+        width: 100%;
+      }
+    }
+  }
+  .hostbanner:after{
+    position: absolute;
+    left: 50%;
+    -webkit-transform: translateX(-50%);
+    -moz-transform: translateX(-50%);
+    -ms-transform: translateX(-50%);
+    -o-transform: translateX(-50%);
+    transform: translateX(-50%);
+    content:'' ;
+    height: 2px;
+    width: 18px;
+    background: #004296;
+    bottom:-2.1rem;
+  }
+  .listwrap{
+    margin-top: 2.3rem;
+    height: 2.9rem;
+    overflow: hidden;
+    position: relative;
+    ul{
+      position: absolute;
+    }
+    li{
+      padding-bottom: 6px;
+      width: 3.65rem;
+      color: #666;
+      text-align: center;
+      overflow-x: hidden;
+      .iconfont{
+        margin: 6px auto;
+        width: 1.4rem;
+        height: 1.4rem;
+        box-shadow: 0 0 2px #666;
+        border-radius: 2px;
+      }
+    }
+  }
+  .photoImg{
+    margin-top: 20px;
+    h4{
+      font-size: 0.8rem;
+      line-height: 1.5rem;
+      text-align: center;
+      background: #fff;
+    }
+    ul{
+      width: 50%;
+      float: left;
+      li{
+        border: 1px solid #eaeaea;
+        margin-top: 1px;
+        background: #fff;
+        padding: 10px;
+        figure{
+          width: 100%;
+          img{
+            width: 100%;
+          }
+          figcaption{
+            font-size: 0.6rem;
+            text-align: center;
+            padding: 10px 0;
+            line-height: 0.8rem;
+          }
+        }
+
+      }
+    }
+  }
+  #photoWrap{
+    height: 100%;
+    width: 100%;
+    position:fixed;
+    left: 50%;
+    top: 50%;
+    transform: translate(-50%,-50%);
+
+    #mySwipe div{
+      background: #000000;
+      font-size:1rem;
+      text-align:center;
+      height: 100%;
+      border-radius: 3px;
+      position: relative;
+      img{
+        position: absolute;
+        top: 50%;
+        -webkit-transform: translate(-50%,-50%);
+        -moz-transform: translate(-50%,-50%);
+        -ms-transform: translate(-50%,-50%);
+        -o-transform: translate(-50%,-50%);
+        transform: translate(-50%,-50%);;
+        width: 100%;
+      }
+      .textDesgin{
+        width: 100%;
+        position: absolute;
+        bottom: 0;
+        background: rgba(0,0,0,0.4);
+        li{
+          font-size: 0.6rem;
+          color: #f4f4f4;
+          padding: 0.5rem 0 ;
+
+        }
+      }
+
+    }
+    .swipe {
+      overflow: hidden;
+      visibility: hidden;
+      height: 100%;
+      position: relative;
+    }
+    .swipe-wrap {
+      height: 100%;
+      overflow: hidden;
+      position: relative;
+    }
+    .swipe-wrap > div {
+      float:left;
+      width:100%;
+      height: 100%;
+      position: relative;
+    }
+
+
+
+  }
+}

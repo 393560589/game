@@ -1,0 +1,64 @@
+<!doctype html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport"
+          content="width=device-width, user-scalable=no, initial-scale=1.0, maximum-scale=1.0, minimum-scale=1.0">
+    <meta http-equiv="X-UA-Compatible" content="ie=edge">
+    <title>Document</title>
+    <style>
+        *{
+            margin: 0;
+            padding: 0;
+        }
+        #oInp ul{
+            position: relative;
+        }
+        #oInp li{
+            color: #fff2bf;
+            text-align: center;
+            list-style: none;
+            line-height:80px;
+            width:100%;
+            background: rgba(0,0,0,0.2);
+            border-bottom: 1px solid #fff;
+        }
+    </style>
+</head>
+<body>
+
+    <input type="file" id="file" name="uploadfile"/>
+    <input type="submit" value="添加" id="submit">
+
+
+
+    <script src="node_modules/reqwest/reqwest.js"></script>
+
+    <script>
+
+        var submit = document.getElementById('submit')
+        submit.onclick = function() {
+            var files = document.getElementById('file');
+            var data = files.files;
+            console.log(data[0])
+            var formData = new FormData();
+
+            formData.append('upfile',data[0])
+
+            console.log(formData)
+           reqwest({
+                url: 'http://114.55.245.254/upload.php',
+                method: 'post',
+                data: formData,
+                   processData: false,
+                   contentType: false,
+                success: function (xrh) {
+                    console.log(typeof xrh)
+                    console.log(xrh.img)
+                }
+            })
+        }
+
+    </script>
+</body>
+</html>
