@@ -1,228 +1,228 @@
 body {
-  background-color: #f2f2f2;
-}
-.index {
+  background: #f1f1f1;
   font-size: 0.6rem;
-}
-.index .apptool {
-  padding: 0 14px;
-  height: 1.25rem;
-  line-height: 1.25rem;
-  background-color: #fffffa;
-  box-shadow: 0 0 2px #a5a570;
-  color: #a5a570;
-  margin: 10px 0;
-}
-.index .history {
-  background: #ffffff;
-  padding: 0 14px;
-}
-.index .history h2 {
-  color: #3c3c3c;
-  font-size: 0.7rem;
-  line-height: 1.2rem;
-  border-bottom: 1px solid #eaeaea;
-}
-.index .history .listwrap {
-  height: 2.9rem;
-  overflow: hidden;
-  position: relative;
-}
-.index .history .listwrap ul {
-  position: absolute;
-}
-.index .history .listwrap li {
-  padding-bottom: 6px;
-  width: 3.65rem;
-  color: #666;
-  text-align: center;
-  overflow-x: hidden;
-}
-.index .history .listwrap li .gamelogo {
-  margin: 6px auto;
-  width: 1.4rem;
-  height: 1.4rem;
-  box-shadow: 0 0 2px #666;
-  border-radius: 2px;
-}
-.index .secondaryNav {
-  background-color: #fff;
-  margin-top: 10px;
-  border-top: 1px solid #eaeaea;
-}
-.index .secondaryNav .navSecond {
-  transition: all .3s;
-  height: 1.8rem;
-  position: relative;
-  border-bottom: 1px solid #eaeaea;
-  overflow: hidden;
-}
-.index .secondaryNav .navSecond .wrapA {
-  line-height: 1.8rem;
-  width: 25%;
-  text-align: center;
-  display: block;
-  float: left;
-}
-.index .secondaryNav .navSecond .wrapA .allclass {
-  position: absolute;
-  left: 0;
-  width: 16rem;
-  display: block;
-}
-.index .secondaryNav .navSecond .wrapA .allclass .allA {
-  font-size: 0.5rem;
-  width: 3.2rem;
-  display: block;
-  float: left;
-}
-.theHost {
-  font-size: 0.7rem;
-}
-.theHost .header {
-  background: #fff;
-}
-.theHost .hostbanner {
-  background: #393a3f;
-  height: 8rem;
-  position: relative;
-}
-.theHost .hostbanner .imgWrap {
-  width: 13rem;
-  height: 7rem;
-  box-shadow: 0 0 2px rgba(0, 0, 0, 0.2);
-  position: absolute;
-  overflow: hidden;
-  bottom: -1rem;
-  left: 50%;
-  -webkit-transform: translateX(-50%);
-  -moz-transform: translateX(-50%);
-  -ms-transform: translateX(-50%);
-  -o-transform: translateX(-50%);
-  transform: translateX(-50%);
-}
-.theHost .hostbanner .imgWrap img {
   width: 100%;
 }
-.theHost .hostbanner:after {
-  position: absolute;
-  left: 50%;
-  -webkit-transform: translateX(-50%);
-  -moz-transform: translateX(-50%);
-  -ms-transform: translateX(-50%);
-  -o-transform: translateX(-50%);
-  transform: translateX(-50%);
-  content: '';
-  height: 2px;
-  width: 18px;
-  background: #004296;
-  bottom: -2.1rem;
-}
-.theHost .listwrap {
-  margin-top: 2.3rem;
-  height: 2.9rem;
+.index .swiper-container {
+  height: 10rem;
+  width: 100%;
+  background: #eaeaea;
   overflow: hidden;
-  position: relative;
 }
-.theHost .listwrap ul {
-  position: absolute;
+.index .describe {
+  background: #fff;
+  padding: 15px;
+  margin-bottom: 2.3rem;
+  color: #3D3D3E;
 }
-.theHost .listwrap li {
-  padding-bottom: 6px;
-  width: 3.65rem;
-  color: #666;
-  text-align: center;
-  overflow-x: hidden;
-}
-.theHost .listwrap li .iconfont {
-  margin: 6px auto;
-  width: 1.4rem;
-  height: 1.4rem;
-  box-shadow: 0 0 2px #666;
-  border-radius: 2px;
-}
-.theHost .photoImg {
-  margin-top: 20px;
-}
-.theHost .photoImg h4 {
+.index .describe p {
   font-size: 0.8rem;
-  line-height: 1.5rem;
+  line-height: 1rem;
+}
+.index a.abtn {
+  width: 100%;
+  background: #5A7CDD;
+}
+.goback {
+  width: 100%;
+  z-index: 99;
+  display: block;
+  background: #5A7CDD;
+  height: 2rem;
+  line-height: 2rem;
   text-align: center;
-  background: #fff;
+  color: #fff;
+  font-size: 0.8rem;
+  padding: 0 28px;
 }
-.theHost .photoImg ul {
-  width: 50%;
-  float: left;
-}
-.theHost .photoImg ul li {
-  border: 1px solid #eaeaea;
-  margin-top: 1px;
-  background: #fff;
-  padding: 10px;
-}
-.theHost .photoImg ul li figure {
-  width: 100%;
-}
-.theHost .photoImg ul li figure img {
-  width: 100%;
-}
-.theHost .photoImg ul li figure figcaption {
-  font-size: 0.6rem;
-  text-align: center;
-  padding: 10px 0;
-  line-height: 0.8rem;
-}
-.theHost #photoWrap {
-  height: 100%;
-  width: 100%;
-  position: fixed;
-  left: 50%;
-  top: 50%;
-  transform: translate(-50%, -50%);
-}
-.theHost #photoWrap #mySwipe div {
-  background: #000000;
+.goback .iconfont {
   font-size: 1rem;
+}
+.tb-msg,
+.tb-car {
+  font-size: 0.8rem;
+}
+.tb-msg .tb-det,
+.tb-car .tb-det {
+  color: #3D3D3E;
+}
+.tb-msg .tb-det li,
+.tb-car .tb-det li {
+  background: #fff;
+  margin-bottom: 1px;
+  padding: 0 10px;
+  font-size: 0;
+}
+.tb-msg .tb-det li b,
+.tb-car .tb-det li b,
+.tb-msg .tb-det li span,
+.tb-car .tb-det li span,
+.tb-msg .tb-det li i,
+.tb-car .tb-det li i {
+  line-height: 2.2rem;
+  font-size: 0.8rem;
+  display: inline-block;
+}
+.tb-msg .tb-det li .iconfont,
+.tb-car .tb-det li .iconfont {
+  color: #C4C4C5;
+}
+.tb-msg .tb-det li b,
+.tb-car .tb-det li b {
+  width: 3.7rem;
+}
+.tb-msg .tb-det li span,
+.tb-car .tb-det li span {
+  width: 13rem;
+}
+.tb-msg .tb-det li .value,
+.tb-car .tb-det li .value {
+  font-size: 0.8rem;
+  width: 100%;
+  line-height: 100%;
+}
+.tb-msg a.abtn,
+.tb-car a.abtn {
+  background: #C4C4C5 100%;
+}
+.tb-msg .companys li,
+.tb-car .companys li {
+  line-height: 2.2rem;
+  background: #fff;
+  padding: 0 10px;
+}
+.tb-msg .companys .iconfont,
+.tb-car .companys .iconfont {
+  font-size: 1rem;
+  color: #5A7CDD;
+}
+.se-tit {
+  padding-left: 10px;
+  font-size: 0.8rem;
+  line-height: 2rem;
+  color: #B1B1B2;
+  background-color: #f1f1f1;
+}
+.proWrap,
+.carWrap {
+  overflow-x: hidden;
+  position: fixed;
+  width: 100%;
+  height: 100%;
+  z-index: 999;
+  -webkit-transition: all .3s;
+  -moz-transition: all .3s;
+  -ms-transition: all .3s;
+  -o-transition: all .3s;
+  transition: all .3s;
+}
+.proWrap #sure,
+.carWrap #sure {
+  background: #5A7CDD;
+  display: none;
+}
+.carWrap {
+  background: #f1f1f1;
+}
+.tb-carlist .check {
+  font-size: 1rem;
+  color: #5A7CDD;
+}
+.tb-carlist .tb-allpro .tb-pro {
+  height: 2.2rem;
+  overflow: hidden;
+  background: #fff;
+  border: 1px solid #f1f1f1;
+  text-indent: 10px;
+  line-height: 2.2rem;
+  color: #3D3D3E;
+  font-size: 0.8rem;
+  -webkit-transition: all .3s;
+  -moz-transition: all .3s;
+  -ms-transition: all .3s;
+  -o-transition: all .3s;
+  transition: all .3s;
+}
+.tb-carlist .tb-allpro .tb-pro h4 {
+  width: 80%;
+  display: inline-block;
+}
+.tb-carlist .tb-allpro .tb-pro dl dd {
+  margin-top: 1px;
+  padding-left: 16px;
+  border-bottom: 1px solid #f1f1f1;
+}
+.tb-carlist .tb-allpro .tb-pro dl dd:nth-of-type(1) {
+  border: 1px solid #f1f1f1;
+}
+.tb-carlist .tb-allpro .tb-pro dl dd:nth-last-of-type(1) {
+  border-bottom: 0;
+}
+.tb-carlist .tb-allpro .tb-pro .iconfont {
+  margin-right: 17px;
+}
+.tb-carlist a.abtn {
+  background: #5A7CDD;
+}
+.tb-car .button {
+  margin-top: 0.6rem;
+  width: 1.7rem;
+  height: 1rem;
+  background: #4CDB5D;
+  border-radius: 100px;
+  position: relative;
+  float: right;
+  padding: 1px;
+}
+.tb-car .button .circle {
+  display: block;
+  width: 0.9rem;
+  height: 0.9rem;
+  position: absolute;
+  border-radius: 50%;
+  background: #fff;
+  right: 1px;
+}
+.tbcarDe .serch {
+  width: 17rem;
+  margin: 0.5rem auto 1rem;
+  height: 1.9rem;
+  line-height: 1.9rem;
+  background: #fff;
+  border: 1px solid #5A7CDD ;
+  border-radius: 100px;
+}
+.tbcarDe .serch .iconfont {
+  color: #5A7CDD;
+  font-size: 0.9rem;
+  width: 2rem;
+  line-height: 1.8rem;
+}
+.tbcarDe .serch form {
+  display: inline-block;
+  width: 80%;
+}
+.tbcarDe .serch input[type='search'] {
+  width: 100%;
+  line-height: 1.8rem;
+  font-size: 0.8rem;
+}
+.tbcarDe .hot-li li {
+  font-size: 0.7rem;
+  color: #3D3D3E;
+  line-height: 2.2rem;
   text-align: center;
-  height: 100%;
-  border-radius: 3px;
-  position: relative;
-}
-.theHost #photoWrap #mySwipe div img {
-  position: absolute;
-  top: 50%;
-  -webkit-transform: translate(-50%, -50%);
-  -moz-transform: translate(-50%, -50%);
-  -ms-transform: translate(-50%, -50%);
-  -o-transform: translate(-50%, -50%);
-  transform: translate(-50%, -50%);
-  width: 100%;
-}
-.theHost #photoWrap #mySwipe div .textDesgin {
-  width: 100%;
-  position: absolute;
-  bottom: 0;
-  background: rgba(0, 0, 0, 0.4);
-}
-.theHost #photoWrap #mySwipe div .textDesgin li {
-  font-size: 0.6rem;
-  color: #f4f4f4;
-  padding: 0.5rem 0 ;
-}
-.theHost #photoWrap .swipe {
-  overflow: hidden;
-  visibility: hidden;
-  height: 100%;
-  position: relative;
-}
-.theHost #photoWrap .swipe-wrap {
-  height: 100%;
-  overflow: hidden;
-  position: relative;
-}
-.theHost #photoWrap .swipe-wrap > div {
   float: left;
+  width: 20%;
+  margin-bottom: 1px;
+  background: #fff;
+  border-right: 1px solid #f1f1f1;
+}
+.eve-li li {
+  font-size: 0.8rem;
   width: 100%;
-  height: 100%;
-  position: relative;
+  background: #fff;
+  margin-bottom: 1px;
+  padding-left: 15px;
+  line-height: 2.2rem;
 }
