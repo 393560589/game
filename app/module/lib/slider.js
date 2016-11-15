@@ -8,7 +8,11 @@ var Slider = React.createClass({
         return (
                 <div className="swiper-container">
                     <div className="swiper-wrapper">
-                        <div className="swiper-slide">Slide 1</div>
+                        <div className="swiper-slide">
+                            <a href={this.props.url}>
+                                <img src={this.props.imgurl} alt=""/>
+                            </a>
+                        </div>
                     </div>
                     <div className="swiper-pagination"></div>
                 </div>

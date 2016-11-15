@@ -1,11 +1,10 @@
 /******/ (function(modules) { // webpackBootstrap
 /******/ 	var parentHotUpdateCallback = this["webpackHotUpdate"];
-/******/ 	this["webpackHotUpdate"] = 
-/******/ 	function webpackHotUpdateCallback(chunkId, moreModules) { // eslint-disable-line no-unused-vars
+/******/ 	this["webpackHotUpdate"] = function webpackHotUpdateCallback(chunkId, moreModules) { // eslint-disable-line no-unused-vars
 /******/ 		hotAddUpdateChunk(chunkId, moreModules);
 /******/ 		if(parentHotUpdateCallback) parentHotUpdateCallback(chunkId, moreModules);
 /******/ 	}
-/******/ 	
+
 /******/ 	function hotDownloadUpdateChunk(chunkId) { // eslint-disable-line no-unused-vars
 /******/ 		var head = document.getElementsByTagName("head")[0];
 /******/ 		var script = document.createElement("script");
@@ -14,7 +13,7 @@
 /******/ 		script.src = __webpack_require__.p + "" + chunkId + "." + hotCurrentHash + ".hot-update.js";
 /******/ 		head.appendChild(script);
 /******/ 	}
-/******/ 	
+
 /******/ 	function hotDownloadManifest(callback) { // eslint-disable-line no-unused-vars
 /******/ 		if(typeof XMLHttpRequest === "undefined")
 /******/ 			return callback(new Error("No browser support"));
@@ -51,8 +50,7 @@
 /******/ 		};
 /******/ 	}
 
-/******/ 	
-/******/ 	
+
 /******/ 	// Copied from https://github.com/facebook/react/blob/bef45b0/src/shared/utils/canDefineProperty.js
 /******/ 	var canDefineProperty = false;
 /******/ 	try {
@@ -63,12 +61,12 @@
 /******/ 	} catch(x) {
 /******/ 		// IE will fail on defineProperty
 /******/ 	}
-/******/ 	
+
 /******/ 	var hotApplyOnUpdate = true;
-/******/ 	var hotCurrentHash = "d9119a5725cf0d1785e3"; // eslint-disable-line no-unused-vars
+/******/ 	var hotCurrentHash = "1efa89898e42165abd27"; // eslint-disable-line no-unused-vars
 /******/ 	var hotCurrentModuleData = {};
 /******/ 	var hotCurrentParents = []; // eslint-disable-line no-unused-vars
-/******/ 	
+
 /******/ 	function hotCreateRequire(moduleId) { // eslint-disable-line no-unused-vars
 /******/ 		var me = installedModules[moduleId];
 /******/ 		if(!me) return __webpack_require__;
@@ -106,7 +104,7 @@
 /******/ 				}
 /******/ 			}
 /******/ 		}
-/******/ 	
+
 /******/ 		function ensure(chunkId, callback) {
 /******/ 			if(hotStatus === "ready")
 /******/ 				hotSetStatus("prepare");
@@ -117,7 +115,7 @@
 /******/ 				} finally {
 /******/ 					finishChunkLoading();
 /******/ 				}
-/******/ 	
+
 /******/ 				function finishChunkLoading() {
 /******/ 					hotChunksLoading--;
 /******/ 					if(hotStatus === "prepare") {
@@ -141,7 +139,7 @@
 /******/ 		}
 /******/ 		return fn;
 /******/ 	}
-/******/ 	
+
 /******/ 	function hotCreateModule(moduleId) { // eslint-disable-line no-unused-vars
 /******/ 		var hot = {
 /******/ 			// private stuff
@@ -150,7 +148,7 @@
 /******/ 			_selfAccepted: false,
 /******/ 			_selfDeclined: false,
 /******/ 			_disposeHandlers: [],
-/******/ 	
+
 /******/ 			// Module API
 /******/ 			active: true,
 /******/ 			accept: function(dep, callback) {
@@ -183,7 +181,7 @@
 /******/ 				var idx = hot._disposeHandlers.indexOf(callback);
 /******/ 				if(idx >= 0) hot._disposeHandlers.splice(idx, 1);
 /******/ 			},
-/******/ 	
+
 /******/ 			// Management API
 /******/ 			check: hotCheck,
 /******/ 			apply: hotApply,
@@ -198,22 +196,22 @@
 /******/ 				var idx = hotStatusHandlers.indexOf(l);
 /******/ 				if(idx >= 0) hotStatusHandlers.splice(idx, 1);
 /******/ 			},
-/******/ 	
+
 /******/ 			//inherit from previous dispose call
 /******/ 			data: hotCurrentModuleData[moduleId]
 /******/ 		};
 /******/ 		return hot;
 /******/ 	}
-/******/ 	
+
 /******/ 	var hotStatusHandlers = [];
 /******/ 	var hotStatus = "idle";
-/******/ 	
+
 /******/ 	function hotSetStatus(newStatus) {
 /******/ 		hotStatus = newStatus;
 /******/ 		for(var i = 0; i < hotStatusHandlers.length; i++)
 /******/ 			hotStatusHandlers[i].call(null, newStatus);
 /******/ 	}
-/******/ 	
+
 /******/ 	// while downloading
 /******/ 	var hotWaitingFiles = 0;
 /******/ 	var hotChunksLoading = 0;
@@ -221,15 +219,15 @@
 /******/ 	var hotRequestedFilesMap = {};
 /******/ 	var hotAvailibleFilesMap = {};
 /******/ 	var hotCallback;
-/******/ 	
+
 /******/ 	// The update info
 /******/ 	var hotUpdate, hotUpdateNewHash;
-/******/ 	
+
 /******/ 	function toModuleId(id) {
 /******/ 		var isNumber = (+id) + "" === id;
 /******/ 		return isNumber ? +id : id;
 /******/ 	}
-/******/ 	
+
 /******/ 	function hotCheck(apply, callback) {
 /******/ 		if(hotStatus !== "idle") throw new Error("check() is only allowed in idle status");
 /******/ 		if(typeof apply === "function") {
@@ -249,14 +247,14 @@
 /******/ 				callback(null, null);
 /******/ 				return;
 /******/ 			}
-/******/ 	
+
 /******/ 			hotRequestedFilesMap = {};
 /******/ 			hotAvailibleFilesMap = {};
 /******/ 			hotWaitingFilesMap = {};
 /******/ 			for(var i = 0; i < update.c.length; i++)
 /******/ 				hotAvailibleFilesMap[update.c[i]] = true;
 /******/ 			hotUpdateNewHash = update.h;
-/******/ 	
+
 /******/ 			hotSetStatus("prepare");
 /******/ 			hotCallback = callback;
 /******/ 			hotUpdate = {};
@@ -270,7 +268,7 @@
 /******/ 			}
 /******/ 		});
 /******/ 	}
-/******/ 	
+
 /******/ 	function hotAddUpdateChunk(chunkId, moreModules) { // eslint-disable-line no-unused-vars
 /******/ 		if(!hotAvailibleFilesMap[chunkId] || !hotRequestedFilesMap[chunkId])
 /******/ 			return;
@@ -284,7 +282,7 @@
 /******/ 			hotUpdateDownloaded();
 /******/ 		}
 /******/ 	}
-/******/ 	
+
 /******/ 	function hotEnsureUpdateChunk(chunkId) {
 /******/ 		if(!hotAvailibleFilesMap[chunkId]) {
 /******/ 			hotWaitingFilesMap[chunkId] = true;
@@ -294,7 +292,7 @@
 /******/ 			hotDownloadUpdateChunk(chunkId);
 /******/ 		}
 /******/ 	}
-/******/ 	
+
 /******/ 	function hotUpdateDownloaded() {
 /******/ 		hotSetStatus("ready");
 /******/ 		var callback = hotCallback;
@@ -312,7 +310,7 @@
 /******/ 			callback(null, outdatedModules);
 /******/ 		}
 /******/ 	}
-/******/ 	
+
 /******/ 	function hotApply(options, callback) {
 /******/ 		if(hotStatus !== "ready") throw new Error("apply() is only allowed in ready status");
 /******/ 		if(typeof options === "function") {
@@ -328,11 +326,11 @@
 /******/ 				if(err) throw err;
 /******/ 			};
 /******/ 		}
-/******/ 	
+
 /******/ 		function getAffectedStuff(module) {
 /******/ 			var outdatedModules = [module];
 /******/ 			var outdatedDependencies = {};
-/******/ 	
+
 /******/ 			var queue = outdatedModules.slice();
 /******/ 			while(queue.length > 0) {
 /******/ 				var moduleId = queue.pop();
@@ -363,10 +361,10 @@
 /******/ 					queue.push(parentId);
 /******/ 				}
 /******/ 			}
-/******/ 	
+
 /******/ 			return [outdatedModules, outdatedDependencies];
 /******/ 		}
-/******/ 	
+
 /******/ 		function addAllToSet(a, b) {
 /******/ 			for(var i = 0; i < b.length; i++) {
 /******/ 				var item = b[i];
@@ -374,7 +372,7 @@
 /******/ 					a.push(item);
 /******/ 			}
 /******/ 		}
-/******/ 	
+
 /******/ 		// at begin all updates modules are outdated
 /******/ 		// the "outdated" status can propagate to parents if they don't accept the children
 /******/ 		var outdatedDependencies = {};
@@ -405,7 +403,7 @@
 /******/ 				}
 /******/ 			}
 /******/ 		}
-/******/ 	
+
 /******/ 		// Store self accepted outdated modules to require them later by the module system
 /******/ 		var outdatedSelfAcceptedModules = [];
 /******/ 		for(var i = 0; i < outdatedModules.length; i++) {
@@ -416,7 +414,7 @@
 /******/ 					errorHandler: installedModules[moduleId].hot._selfAccepted
 /******/ 				});
 /******/ 		}
-/******/ 	
+
 /******/ 		// Now in "dispose" phase
 /******/ 		hotSetStatus("dispose");
 /******/ 		var queue = outdatedModules.slice();
@@ -424,9 +422,9 @@
 /******/ 			var moduleId = queue.pop();
 /******/ 			var module = installedModules[moduleId];
 /******/ 			if(!module) continue;
-/******/ 	
+
 /******/ 			var data = {};
-/******/ 	
+
 /******/ 			// Call dispose handlers
 /******/ 			var disposeHandlers = module.hot._disposeHandlers;
 /******/ 			for(var j = 0; j < disposeHandlers.length; j++) {
@@ -434,13 +432,13 @@
 /******/ 				cb(data);
 /******/ 			}
 /******/ 			hotCurrentModuleData[moduleId] = data;
-/******/ 	
+
 /******/ 			// disable module (this disables requires from this module)
 /******/ 			module.hot.active = false;
-/******/ 	
+
 /******/ 			// remove module from cache
 /******/ 			delete installedModules[moduleId];
-/******/ 	
+
 /******/ 			// remove "parents" references from all children
 /******/ 			for(var j = 0; j < module.children.length; j++) {
 /******/ 				var child = installedModules[module.children[j]];
@@ -451,7 +449,7 @@
 /******/ 				}
 /******/ 			}
 /******/ 		}
-/******/ 	
+
 /******/ 		// remove outdated dependency from module children
 /******/ 		for(var moduleId in outdatedDependencies) {
 /******/ 			if(Object.prototype.hasOwnProperty.call(outdatedDependencies, moduleId)) {
@@ -464,19 +462,19 @@
 /******/ 				}
 /******/ 			}
 /******/ 		}
-/******/ 	
+
 /******/ 		// Not in "apply" phase
 /******/ 		hotSetStatus("apply");
-/******/ 	
+
 /******/ 		hotCurrentHash = hotUpdateNewHash;
-/******/ 	
+
 /******/ 		// insert new code
 /******/ 		for(var moduleId in appliedUpdate) {
 /******/ 			if(Object.prototype.hasOwnProperty.call(appliedUpdate, moduleId)) {
 /******/ 				modules[moduleId] = appliedUpdate[moduleId];
 /******/ 			}
 /******/ 		}
-/******/ 	
+
 /******/ 		// call accept handlers
 /******/ 		var error = null;
 /******/ 		for(var moduleId in outdatedDependencies) {
@@ -501,7 +499,7 @@
 /******/ 				}
 /******/ 			}
 /******/ 		}
-/******/ 	
+
 /******/ 		// Load self accepted modules
 /******/ 		for(var i = 0; i < outdatedSelfAcceptedModules.length; i++) {
 /******/ 			var item = outdatedSelfAcceptedModules[i];
@@ -521,13 +519,13 @@
 /******/ 					error = err;
 /******/ 			}
 /******/ 		}
-/******/ 	
+
 /******/ 		// handle errors in accept handlers and self accepted module load
 /******/ 		if(error) {
 /******/ 			hotSetStatus("fail");
 /******/ 			return callback(error);
 /******/ 		}
-/******/ 	
+
 /******/ 		hotSetStatus("idle");
 /******/ 		callback(null, outdatedModules);
 /******/ 	}
@@ -712,10 +710,15 @@
 
 	//module
 	var Index = __webpack_require__(232);
-	var Tbmsg = __webpack_require__(235);
-	var Tbcar = __webpack_require__(241);
+	var Tbmsg = __webpack_require__(240);
+	var Tbcar = __webpack_require__(244);
+	var Program = __webpack_require__(246);
+	var Imme = __webpack_require__(249);
+	var Order = __webpack_require__(251);
+	var CheckMsg = __webpack_require__(252);
+	var Suc = __webpack_require__(253);
 
-	var routes = React.createElement(Router, { history: browserHistory }, React.createElement(Route, { name: 'index', path: '/', component: Index }), React.createElement(Route, { name: 'tbmsg', path: '/msg', component: Tbmsg }), React.createElement(Route, { name: 'car', path: '/car', component: Tbcar }));
+	var routes = React.createElement(Router, { history: browserHistory }, React.createElement(Route, { name: 'index', path: '/', component: Index }), React.createElement(Route, { name: 'tbmsg', path: '/msg', component: Tbmsg }), React.createElement(Route, { name: 'car', path: '/car/:userId', component: Tbcar }), React.createElement(Route, { name: 'program', path: '/program/:userId', component: Program }), React.createElement(Route, { name: 'imme', path: '/imme/:userId', component: Imme }), React.createElement(Route, { name: 'chmsg', path: '/chmsg/:userId', component: CheckMsg }), React.createElement(Route, { name: 'order', path: '/order/:userId', component: Order }), React.createElement(Route, { name: 'suc', path: '/suc', component: Suc }));
 	React.render(React.createElement(Router, { routes: routes, history: browserHistory }), document.body);
 
 	/* REACT HOT LOADER */ }).call(this); } finally { if (true) { (function () { var foundReactClasses = module.hot.data && module.hot.data.foundReactClasses || false; if (module.exports && module.makeHot) { var makeExportsHot = __webpack_require__(228); if (makeExportsHot(module, __webpack_require__(69))) { foundReactClasses = true; } var shouldAcceptModule = true && foundReactClasses; if (shouldAcceptModule) { module.hot.accept(function (err) { if (err) { console.error("Cannot not apply hot update to " + "app.js" + ": " + err.message); } }); } } module.hot.dispose(function (data) { data.makeHot = module.makeHot; data.foundReactClasses = foundReactClasses; }); })(); } }
@@ -27631,15 +27634,44 @@
 
 	var Router = _require.Router;
 	var Link = _require.Link;
-	var History = _require.History;
+	var browserHistory = _require.browserHistory;
 
 	//
 	var Slider = __webpack_require__(233); //slider广告banner
+	var reqwest = __webpack_require__(235);
+	var url = __webpack_require__(237);
+
+	var allWay = __webpack_require__(238);
+	var Load = __webpack_require__(239);
 
 	var Index = React.createClass({
 	    displayName: 'Index',
 
+	    getInitialState: function getInitialState() {
+	        return {
+	            isbanner: false,
+	            banner: null
+	        };
+	    },
 	    componentDidMount: function componentDidMount() {
+	        var _this = this;
+
+	        reqwest({
+	            method: 'get',
+	            url: url + 'V1/banner',
+	            data: {
+	                type: 'index'
+	            },
+	            success: function success(resp) {
+	                if (_this.isMounted()) {
+	                    _this.setState({
+	                        isbanner: true,
+	                        banner: resp
+	                    });
+	                }
+	            }
+	        });
+
 	        var swiper = new Swiper('.index .swiper-container', {
 	            pagination: '.index .swiper-pagination',
 	            paginationClickable: true,
@@ -27649,8 +27681,35 @@
 	            autoplayDisableOnInteraction: false
 	        });
 	    },
+	    moveColor: function moveColor(event) {
+	        var tar = event.currentTarget;
+	        tar.style.backgroundColor = '#5576d4';
+	    },
+	    leaveColor: function leaveColor(event) {
+	        var $ = new allWay();
+	        var tar = event.currentTarget;
+	        tar.style.backgroundColor = '#5A7CDD';
+
+	        var token = $.getQueryString('token');
+	        var opid = $.getQueryString('opid');
+	        var channel = $.getQueryString('channel');
+	        $.cookie('token', token);
+	        $.cookie('opid', opid);
+	        $.cookie('channel', channel);
+
+	        document.getElementById('load').style.display = 'block';
+	        browserHistory.push('/msg');
+	    },
 	    render: function render() {
-	        return React.createElement('div', { className: 'index' }, React.createElement(Slider, null), React.createElement('div', { className: 'describe' }, React.createElement('p', null, '这个区域是详细的保险分期介绍内容这个区域是详细的保险分期介绍内容这个区域是详细的保险分期介绍内容这个区域是详细的保险分期介绍内容这个区域是详细的保险分期介绍内容这个区域是详细的保险分期介绍内容这个区域是详细的保险分期介绍内容这个区域是详细的保险分期介绍内容 这个区域是详细的保险分期介绍内容'), React.createElement('p', null, '这个区域是详细的保险分期介绍内容 这个区域是详细的保险分期介绍内容 这个区域是详细的保险分期介绍内容 这个区域是详细的保险分期介绍内容 这个区域是详细的保险分期介绍内容 这个区域是详细的保险分期介绍内容 这个区域是详细的保险分期介绍内容 这个区域是详细的保险分期介绍内容 这个区域是详细的保险分期介绍内容')), React.createElement(Link, { to: '/msg', className: 'abtn' }, '立即报价'));
+	        var _this = this;
+	        if (this.state.isbanner) {
+	            var resp = React.createElement(Slider, { imgurl: _this.state.banner.imgurl, url: _this.state.banner.url }),
+	                text = _this.state.banner.text;
+	        }
+	        return React.createElement('div', { className: 'index' }, resp, React.createElement('div', { className: 'describe' }, React.createElement('p', null, ' “融助保”是一款专门为车主分期购买车险而诞生的平台，隶属于且信（上海）互联网金融信息服务有限公司，注册资金3000万元。'), React.createElement('p', null, '公司以车险分期为切入点，整合线上线下资源，打造车主金融圈。目前已接入多家财险公司，立志于成为国内最大的车险分期平台。'), React.createElement('p', null, '“融助保”车险分期平台，全场', React.createElement('span', { style: { color: '#FE3824' } }, '0首付、0利息、0手续费！期限多样化'), '（任选 ', React.createElement('span', { style: { color: '#FE3824' } }, '3期、6期、9期'), '分期缴费，让您的资金更灵活，快来“融助保”分期吧！！')), React.createElement(Link, { to: '/msg', className: 'abtn',
+	            onTouchStart: this.moveColor,
+	            onTouchEnd: this.leaveColor
+	        }, '立即报价'), React.createElement(Load, null));
 	    }
 	});
 	module.exports = Index;
@@ -27681,7 +27740,7 @@
 	    displayName: 'Slider',
 
 	    render: function render() {
-	        return React.createElement('div', { className: 'swiper-container' }, React.createElement('div', { className: 'swiper-wrapper' }, React.createElement('div', { className: 'swiper-slide' }, 'Slide 1')), React.createElement('div', { className: 'swiper-pagination' }));
+	        return React.createElement('div', { className: 'swiper-container' }, React.createElement('div', { className: 'swiper-wrapper' }, React.createElement('div', { className: 'swiper-slide' }, React.createElement('a', { href: this.props.url }, React.createElement('img', { src: this.props.imgurl, alt: '' })))), React.createElement('div', { className: 'swiper-pagination' }));
 	    }
 	});
 	module.exports = Slider;
@@ -27702,358 +27761,6 @@
 
 /***/ },
 /* 235 */
-/***/ function(module, exports, __webpack_require__) {
-
-	/* WEBPACK VAR INJECTION */(function(module) {/* REACT HOT LOADER */ if (true) { (function () { var ReactHotAPI = __webpack_require__(5), RootInstanceProvider = __webpack_require__(13), ReactMount = __webpack_require__(15), React = __webpack_require__(69); module.makeHot = module.hot.data ? module.hot.data.makeHot : ReactHotAPI(function () { return RootInstanceProvider.getRootInstances(ReactMount); }, React); })(); } try { (function () {
-
-	/**
-	 * Created by gongchuangshidai on 16/10/10.
-	 */
-	'use strict';
-
-	var React = __webpack_require__(69);
-
-	var _require = __webpack_require__(171);
-
-	var Router = _require.Router;
-	var Link = _require.Link;
-	var History = _require.History;
-
-	var url = __webpack_require__(236);
-
-	var Back = __webpack_require__(237); //slider广告banner
-	var TbPro = __webpack_require__(238);
-
-	var TbMsg = React.createClass({
-	    displayName: 'TbMsg',
-
-	    getInitialState: function getInitialState() {
-	        return {
-	            city: null,
-	            carId: null,
-	            phone: null
-	        };
-	    },
-	    componentDidMount: function componentDidMount() {
-	        var proWrap = document.getElementById('proWrap'),
-	            pro = document.getElementById('pro'),
-	            h = -proWrap.offsetHeight + 'px',
-	            tTop = document.getElementById('tTop'),
-	            sure = document.getElementById('sure');
-
-	        var dataMsg = {};
-	        var nextPage = document.getElementById('nextPage'); //下一页
-
-	        var cityval = document.getElementById('cityval'); //城市
-	        var carId = document.getElementById('carId'); //车牌
-	        var iphoneNum = document.getElementById('iphoneNum'); //手机号
-
-	        nextPage.onclick = function () {
-	            if (carId.value != '') {
-	                if (say.isLicenseNo(carId.value)) {
-	                    dataMsg.carId = carId.value;
-	                }
-	            }
-	            console.log(dataMsg);
-	        };
-
-	        pro.onclick = function () {
-	            tTop.style.position = 'fixed';
-	            tTop.style.top = 0;
-	            proWrap.style.bottom = parseFloat(h) + window.screen.availHeight + 'px';
-	            sure.style.display = 'block';
-	        };
-	    },
-	    render: function render() {
-	        return React.createElement('div', { className: 'tb-msg' }, React.createElement(Back, { tit: '投保信息', url: '/' }), React.createElement('ul', { className: 'tb-det' }, React.createElement('li', { className: 'clearfix', id: 'pro' }, React.createElement('b', null, '投保城市'), React.createElement('span', { id: 'cityval' }, '杭州'), React.createElement('i', { className: 'iconfont' }, '>')), React.createElement('li', null, React.createElement('b', null, '车牌号'), React.createElement('span', null, React.createElement('input', { id: 'carId', className: 'value', type: 'text', placeholder: '请输入车牌信息', maxLength: '7' }))), React.createElement('li', null, React.createElement('b', null, '手机号'), React.createElement('span', null, React.createElement('input', { id: 'iphoneNum', className: 'value', type: 'tel', placeholder: '请输入11位手机号码', maxLength: '11' })))), React.createElement('h4', { className: 'se-tit' }, '保险公司'), React.createElement('ul', { className: 'companys' }, React.createElement('li', null, React.createElement('b', null, '大地保险'), React.createElement('i', { className: 'iconfont pull-right' }, ''))), React.createElement(Link, { to: '/car', className: 'abtn', id: 'nextPage' }, '下一步'), React.createElement(TbPro, null));
-	    }
-	});
-	module.exports = TbMsg;
-
-	/* REACT HOT LOADER */ }).call(this); } finally { if (true) { (function () { var foundReactClasses = module.hot.data && module.hot.data.foundReactClasses || false; if (module.exports && module.makeHot) { var makeExportsHot = __webpack_require__(228); if (makeExportsHot(module, __webpack_require__(69))) { foundReactClasses = true; } var shouldAcceptModule = true && foundReactClasses; if (shouldAcceptModule) { module.hot.accept(function (err) { if (err) { console.error("Cannot not apply hot update to " + "tbmsg.js" + ": " + err.message); } }); } } module.hot.dispose(function (data) { data.makeHot = module.makeHot; data.foundReactClasses = foundReactClasses; }); })(); } }
-	/* WEBPACK VAR INJECTION */}.call(exports, __webpack_require__(4)(module)))
-
-/***/ },
-/* 236 */
-/***/ function(module, exports, __webpack_require__) {
-
-	/* WEBPACK VAR INJECTION */(function(module) {/* REACT HOT LOADER */ if (true) { (function () { var ReactHotAPI = __webpack_require__(5), RootInstanceProvider = __webpack_require__(13), ReactMount = __webpack_require__(15), React = __webpack_require__(69); module.makeHot = module.hot.data ? module.hot.data.makeHot : ReactHotAPI(function () { return RootInstanceProvider.getRootInstances(ReactMount); }, React); })(); } try { (function () {
-
-	/**
-	 * Created by gongchuangshidai on 16/10/11.
-	 */
-
-	'use strict';
-
-	var url = 'http://api.rongzhubao.cn/';
-
-	module.exports = url;
-
-	/* REACT HOT LOADER */ }).call(this); } finally { if (true) { (function () { var foundReactClasses = module.hot.data && module.hot.data.foundReactClasses || false; if (module.exports && module.makeHot) { var makeExportsHot = __webpack_require__(228); if (makeExportsHot(module, __webpack_require__(69))) { foundReactClasses = true; } var shouldAcceptModule = true && foundReactClasses; if (shouldAcceptModule) { module.hot.accept(function (err) { if (err) { console.error("Cannot not apply hot update to " + "item.js" + ": " + err.message); } }); } } module.hot.dispose(function (data) { data.makeHot = module.makeHot; data.foundReactClasses = foundReactClasses; }); })(); } }
-	/* WEBPACK VAR INJECTION */}.call(exports, __webpack_require__(4)(module)))
-
-/***/ },
-/* 237 */
-/***/ function(module, exports, __webpack_require__) {
-
-	/* WEBPACK VAR INJECTION */(function(module) {/* REACT HOT LOADER */ if (true) { (function () { var ReactHotAPI = __webpack_require__(5), RootInstanceProvider = __webpack_require__(13), ReactMount = __webpack_require__(15), React = __webpack_require__(69); module.makeHot = module.hot.data ? module.hot.data.makeHot : ReactHotAPI(function () { return RootInstanceProvider.getRootInstances(ReactMount); }, React); })(); } try { (function () {
-
-	/**
-	 * Created by dell on 2016/10/25.
-	 */
-	'use strict';
-
-	var React = __webpack_require__(69);
-
-	var _require = __webpack_require__(171);
-
-	var Router = _require.Router;
-	var Route = _require.Route;
-	var Link = _require.Link;
-
-	var Back = React.createClass({
-	    displayName: 'Back',
-
-	    render: function render() {
-	        return React.createElement(Link, { to: this.props.url, className: 'goback', id: this.props.id }, React.createElement('i', { className: 'iconfont pull-left' }, ''), this.props.tit);
-	    }
-	});
-	module.exports = Back;
-
-	/* REACT HOT LOADER */ }).call(this); } finally { if (true) { (function () { var foundReactClasses = module.hot.data && module.hot.data.foundReactClasses || false; if (module.exports && module.makeHot) { var makeExportsHot = __webpack_require__(228); if (makeExportsHot(module, __webpack_require__(69))) { foundReactClasses = true; } var shouldAcceptModule = true && foundReactClasses; if (shouldAcceptModule) { module.hot.accept(function (err) { if (err) { console.error("Cannot not apply hot update to " + "goback.js" + ": " + err.message); } }); } } module.hot.dispose(function (data) { data.makeHot = module.makeHot; data.foundReactClasses = foundReactClasses; }); })(); } }
-	/* WEBPACK VAR INJECTION */}.call(exports, __webpack_require__(4)(module)))
-
-/***/ },
-/* 238 */
-/***/ function(module, exports, __webpack_require__) {
-
-	/* WEBPACK VAR INJECTION */(function(module) {/* REACT HOT LOADER */ if (true) { (function () { var ReactHotAPI = __webpack_require__(5), RootInstanceProvider = __webpack_require__(13), ReactMount = __webpack_require__(15), React = __webpack_require__(69); module.makeHot = module.hot.data ? module.hot.data.makeHot : ReactHotAPI(function () { return RootInstanceProvider.getRootInstances(ReactMount); }, React); })(); } try { (function () {
-
-	/**
-	 * Created by gongchuangshidai on 16/10/10.
-	 */
-	'use strict';
-
-	var React = __webpack_require__(69);
-
-	var _require = __webpack_require__(171);
-
-	var Router = _require.Router;
-	var Link = _require.Link;
-	var History = _require.History;
-
-	var url = __webpack_require__(236);
-	var reqwest = __webpack_require__(239);
-	var Back = __webpack_require__(237);
-
-	var data = [{
-	    value: '110100',
-	    city: '北京'
-	}, {
-	    value: '120100',
-	    city: '天津'
-	}, {
-	    value: '310100',
-	    city: '上海'
-	}, {
-	    value: '500100',
-	    city: '重庆'
-	}, {
-	    value: '130000',
-	    city: '河北'
-	}, {
-	    value: '140000',
-	    city: '山西'
-	}, {
-	    value: '150000',
-	    city: '内蒙古'
-	}, {
-	    value: '210000',
-	    city: '辽宁'
-	}, {
-	    value: '220000',
-	    city: '吉林'
-	}, {
-	    value: '230000',
-	    city: '黑龙江'
-	}, {
-	    value: '320000',
-	    city: '江苏'
-	}, {
-	    value: '330000',
-	    city: '浙江'
-	}, {
-	    value: '340000',
-	    city: '安徽'
-	}, {
-	    value: '350000',
-	    city: '福建'
-	}, {
-	    value: '360000',
-	    city: '江西'
-	}, {
-	    value: '370000',
-	    city: '山东'
-	}, {
-	    value: '410000',
-	    city: '河南'
-	}, {
-	    value: '420000',
-	    city: '湖北'
-	}, {
-	    value: '430000',
-	    city: '湖南'
-	}, {
-	    value: '440000',
-	    city: '广东'
-	}, {
-	    value: '450000',
-	    city: '广西'
-	}, {
-	    value: '460000',
-	    city: '海南'
-	}, {
-	    value: '510000',
-	    city: '四川'
-	}, {
-	    value: '520000',
-	    city: '贵州'
-	}, {
-	    value: '530000',
-	    city: '云南'
-	}, {
-	    value: '540000',
-	    city: '西藏'
-	}, {
-	    value: '610000',
-	    city: '陕西'
-	}, {
-	    value: '620000',
-	    city: '甘肃'
-	}, {
-	    value: '630000',
-	    city: '青海'
-	}, {
-	    value: '640000',
-	    city: '宁夏'
-	}, {
-	    value: '650000',
-	    city: '新疆'
-	}];
-
-	var Tbpro = React.createClass({
-	    displayName: 'Tbpro',
-
-	    getInitialState: function getInitialState() {
-	        return {
-	            isCity: false,
-	            citys: null,
-	            icon: 0,
-	            cityName: null
-	        };
-	    },
-	    componentDidMount: function componentDidMount() {
-	        var tTop = document.getElementById('tTop'),
-	            proWrap = document.getElementById('proWrap'),
-	            h = -proWrap.offsetHeight + 'px',
-	            sure = document.getElementById('sure');
-
-	        proWrap.style.bottom = h;
-
-	        tTop.onclick = function () {
-	            close();
-	        };
-	        sure.onclick = function () {
-	            var cityval = document.getElementById('cityval');
-	            var cityClass, cName;
-	            cityClass = document.getElementById('checked');
-	            if (cityClass != null) {
-	                cName = cityClass.parentNode.childNodes[0].innerHTML;
-	                console.log(cName);
-	            } else {
-	                alert('请选择城市');
-	            }
-
-	            if (cName != undefined) {
-	                cityval.innerHTML = cName;
-	                close();
-	            }
-	        };
-
-	        function close() {
-	            tTop.style.position = 'relative';
-	            proWrap.style.bottom = h;
-	            sure.style.display = 'none';
-	        }
-	    },
-	    proClick: function proClick(event) {
-	        var pro = event.target;
-	        var ph = pro.parentNode.style.height;
-	        var city = pro.parentNode.getAttribute('value');
-	        var _this = this;
-	        var allpro = document.getElementById('allpro').children;
-
-	        for (var i = 0, len = allpro.length; i < len; i++) {
-	            allpro[i].style.height = 2.2 + 'rem';
-	            allpro[i].childNodes[1].innerHTML = '<pre class="iconfont">&#xe603;</pre>';
-	        }
-
-	        if (ph == 'auto') {
-	            pro.parentNode.style.height = 2.2 + 'rem';
-	            pro.parentNode.childNodes[1].innerHTML = '<pre class="iconfont">&#xe603;</pre>';
-	        } else {
-	            pro.parentNode.childNodes[1].innerHTML = '<pre class="iconfont">&#xe604;</pre>';
-	            reqwest({
-	                url: url + 'V1/city',
-	                method: 'get',
-	                data: {
-	                    city_name: city
-	                },
-	                success: function success(xrh) {
-	                    console.log(xrh.list.menu);
-	                    if (_this.isMounted()) {
-	                        _this.setState({
-	                            isCity: true,
-	                            citys: xrh.list.menu
-	                        });
-	                    }
-	                }
-	            });
-	            pro.parentNode.style.height = 'auto';
-	        }
-	    },
-	    checkCity: function checkCity(event) {
-	        var ch = event.target;
-	        var sure = React.findDOMNode(this.refs.sure);
-	        var gou = document.getElementsByClassName('gou');
-
-	        for (var i = 0, len = gou.length; i < len; i++) {
-	            gou[i].innerHTML = '';
-	            gou[i].id = '';
-	        }
-
-	        ch.childNodes[1].innerHTML = '<pre class="iconfont check">&#xe600;</pre>';
-	        ch.childNodes[1].id = 'checked';
-	    },
-	    render: function render() {
-	        var _this = this;
-	        if (this.state.isCity) {
-	            var allcity = _this.state.citys.map(function (item) {
-	                return React.createElement('dd', { onClick: _this.checkCity }, item.comname, React.createElement('i', { className: 'pull-right gou' }));
-	            }, _this);
-	        }
-	        return React.createElement('div', { className: 'proWrap', id: 'proWrap' }, React.createElement('div', { className: 'tb-carlist', id: 'prolist', ref: 'prolist' }, React.createElement(Back, { tit: '投保城市', id: 'tTop' }), React.createElement('h4', { className: 'se-tit', style: { marginTop: '2rem' } }, '现已开通投保城市及地区如下：'), React.createElement('ul', { className: 'tb-allpro', id: 'allpro' }, data.map(function (item) {
-	            return React.createElement('li', { className: 'clearfix tb-pro', id: 'pro', ref: 'pro', value: item.city }, React.createElement('h4', { onClick: this.proClick }, item.city), React.createElement('i', { className: 'pull-right', ref: 'more', id: 'more' }, React.createElement('pre', { className: 'iconfont' }, '')), React.createElement('dl', null, allcity));
-	        }, this))), React.createElement('a', { className: 'abtn', ref: 'sure', id: 'sure' }, '确定'));
-	    }
-	});
-	module.exports = Tbpro;
-
-	/* REACT HOT LOADER */ }).call(this); } finally { if (true) { (function () { var foundReactClasses = module.hot.data && module.hot.data.foundReactClasses || false; if (module.exports && module.makeHot) { var makeExportsHot = __webpack_require__(228); if (makeExportsHot(module, __webpack_require__(69))) { foundReactClasses = true; } var shouldAcceptModule = true && foundReactClasses; if (shouldAcceptModule) { module.hot.accept(function (err) { if (err) { console.error("Cannot not apply hot update to " + "tbpro.js" + ": " + err.message); } }); } } module.hot.dispose(function (data) { data.makeHot = module.makeHot; data.foundReactClasses = foundReactClasses; }); })(); } }
-	/* WEBPACK VAR INJECTION */}.call(exports, __webpack_require__(4)(module)))
-
-/***/ },
-/* 239 */
 /***/ function(module, exports, __webpack_require__) {
 
 	var __WEBPACK_AMD_DEFINE_FACTORY__, __WEBPACK_AMD_DEFINE_RESULT__;/*!
@@ -28077,7 +27784,7 @@
 	  } else {
 	    var XHR2
 	    try {
-	      XHR2 = __webpack_require__(240)
+	      XHR2 = __webpack_require__(236)
 	    } catch (ex) {
 	      throw new Error('Peer dependency `xhr2` required! Please npm install xhr2')
 	    }
@@ -28689,13 +28396,384 @@
 
 
 /***/ },
-/* 240 */
+/* 236 */
 /***/ function(module, exports) {
 
 	/* (ignored) */
 
 /***/ },
-/* 241 */
+/* 237 */
+/***/ function(module, exports, __webpack_require__) {
+
+	/* WEBPACK VAR INJECTION */(function(module) {/* REACT HOT LOADER */ if (true) { (function () { var ReactHotAPI = __webpack_require__(5), RootInstanceProvider = __webpack_require__(13), ReactMount = __webpack_require__(15), React = __webpack_require__(69); module.makeHot = module.hot.data ? module.hot.data.makeHot : ReactHotAPI(function () { return RootInstanceProvider.getRootInstances(ReactMount); }, React); })(); } try { (function () {
+
+	/**
+	 * Created by gongchuangshidai on 16/10/11.
+	 */
+
+	'use strict';
+
+	var url = 'http://api.rongzhubao.cn/';
+
+	module.exports = url;
+
+	/* REACT HOT LOADER */ }).call(this); } finally { if (true) { (function () { var foundReactClasses = module.hot.data && module.hot.data.foundReactClasses || false; if (module.exports && module.makeHot) { var makeExportsHot = __webpack_require__(228); if (makeExportsHot(module, __webpack_require__(69))) { foundReactClasses = true; } var shouldAcceptModule = true && foundReactClasses; if (shouldAcceptModule) { module.hot.accept(function (err) { if (err) { console.error("Cannot not apply hot update to " + "item.js" + ": " + err.message); } }); } } module.hot.dispose(function (data) { data.makeHot = module.makeHot; data.foundReactClasses = foundReactClasses; }); })(); } }
+	/* WEBPACK VAR INJECTION */}.call(exports, __webpack_require__(4)(module)))
+
+/***/ },
+/* 238 */
+/***/ function(module, exports, __webpack_require__) {
+
+	/* WEBPACK VAR INJECTION */(function(module) {/* REACT HOT LOADER */ if (true) { (function () { var ReactHotAPI = __webpack_require__(5), RootInstanceProvider = __webpack_require__(13), ReactMount = __webpack_require__(15), React = __webpack_require__(69); module.makeHot = module.hot.data ? module.hot.data.makeHot : ReactHotAPI(function () { return RootInstanceProvider.getRootInstances(ReactMount); }, React); })(); } try { (function () {
+
+	'use strict';
+
+	var allWay = function allWay() {};
+
+	allWay.prototype.getCheckCode = function (sVIN) {
+	    var Arr = new Array();
+	    var Brr = new Array();
+	    Arr['A'] = 1;
+	    Arr['B'] = 2;
+	    Arr['C'] = 3;
+	    Arr['D'] = 4;
+	    Arr['E'] = 5;
+	    Arr['F'] = 6;
+	    Arr['G'] = 7;
+	    Arr['H'] = 8;
+	    Arr['J'] = 1;
+	    Arr['K'] = 2;
+	    Arr['L'] = 3;
+	    Arr['M'] = 4;
+	    Arr['N'] = 5;
+	    Arr['P'] = 7;
+	    Arr['R'] = 9;
+	    Arr['S'] = 2;
+	    Arr['T'] = 3;
+	    Arr['U'] = 4;
+	    Arr['V'] = 5;
+	    Arr['W'] = 6;
+	    Arr['X'] = 7;
+	    Arr['Y'] = 8;
+	    Arr['Z'] = 9;
+	    Arr['1'] = 1;
+	    Arr['2'] = 2;
+	    Arr['3'] = 3;
+	    Arr['4'] = 4;
+	    Arr['5'] = 5;
+	    Arr['6'] = 6;
+	    Arr['7'] = 7;
+	    Arr['8'] = 8;
+	    Arr['9'] = 9;
+	    Arr['0'] = 0;
+	    Brr[1] = 8;
+	    Brr[2] = 7;
+	    Brr[3] = 6;
+	    Brr[4] = 5;
+	    Brr[5] = 4;
+	    Brr[6] = 3;
+	    Brr[7] = 2;
+	    Brr[8] = 10;
+	    Brr[9] = 0;
+	    Brr[10] = 9;
+	    Brr[11] = 8;
+	    Brr[12] = 7;
+	    Brr[13] = 6;
+	    Brr[14] = 5;
+	    Brr[15] = 4;
+	    Brr[16] = 3;
+	    Brr[17] = 2;
+	    var ht, htZM;
+	    var sKYZF = 'ABCDEFGHJKLMNPRSTUVWXYZ1234567890';
+	    var sJYW = '';
+	    var bl = false;
+	    var blKYZF = false;
+	    if (sVIN.length == 17) {
+	        var iJQS = 0,
+	            intTemp = 0;
+	        ht = Arr;
+	        htZM = Brr;
+	        try {
+	            for (var i = 0; i < sVIN.length; i++) {
+	                if (sKYZF.indexOf(sVIN.substr(i, 1)) != -1) {
+	                    blKYZF = true;
+	                    iJQS = iJQS + parseInt(ht[sVIN.substr(i, 1)]) * parseInt(htZM[i + 1]);
+	                } else {
+	                    blKYZF = false;
+	                    break;
+	                }
+	            }
+	            if (blKYZF) {
+	                intTemp = iJQS % 11;
+	                if (intTemp == 10) {
+	                    sJYW = 'X';
+	                } else {
+	                    sJYW = intTemp.toString();
+	                }
+	                if (sJYW == sVIN.substr(8, 1)) bl = true;
+	            } else {
+	                bl = false;
+	            }
+	        } catch (err) {
+	            bl = false;
+	        }
+	    }
+	    return bl;
+	}; //车架号正则检验
+	allWay.prototype.isPhone = function (phone) {
+	    return /^1(3|4|5|7|8)\d{9}$/.test(phone);
+	};
+	//手机号判断对错
+	allWay.prototype.cidInfo = function (sId) {
+	    var aCity = { 11: '北京', 12: '天津', 13: '河北', 14: '山西', 15: '内蒙古', 21: '辽宁', 22: '吉林', 23: '黑龙江', 31: '上海', 32: '江苏', 33: '浙江', 34: '安徽', 35: '福建', 36: '江西', 37: '山东', 41: '河南', 42: '湖北', 43: '湖南', 44: '广东', 45: '广西', 46: '海南', 50: '重庆', 51: '四川', 52: '贵州', 53: '云南', 54: '西藏', 61: '陕西', 62: '甘肃', 63: '青海', 64: '宁夏', 65: '新疆', 71: '台湾', 81: '香港', 82: '澳门', 91: '国外' };
+	    var iSum = 0;
+	    var info = '';
+	    if (!/^\d{17}(\d|x)$/i.test(sId)) return false;
+	    sId = sId.replace(/x$/i, 'a');
+	    if (aCity[parseInt(sId.substr(0, 2))] == null) return 'Error:非法地区';
+	    sBirthday = sId.substr(6, 4) + '-' + Number(sId.substr(10, 2)) + '-' + Number(sId.substr(12, 2));
+	    var d = new Date(sBirthday.replace(/-/g, '/'));
+	    if (sBirthday != d.getFullYear() + '-' + (d.getMonth() + 1) + '-' + d.getDate()) return 'Error:非法生日';
+	    for (var i = 17; i >= 0; i--) iSum += Math.pow(2, i) % 11 * parseInt(sId.charAt(17 - i), 11);
+	    if (iSum % 11 != 1) return 'Error:非法证号';
+	    return aCity[parseInt(sId.substr(0, 2))] + ',' + sBirthday + ',' + (sId.substr(16, 1) % 2 ? '男' : '女');
+	}; //根据省份证查询信息
+	allWay.prototype.validateIdCard = function (idCard) {
+	    //15位和18位身份证号码的正则表达式
+	    var regIdCard = /^(^[1-9]\d{7}((0\d)|(1[0-2]))(([0|1|2]\d)|3[0-1])\d{3}$)|(^[1-9]\d{5}[1-9]\d{3}((0\d)|(1[0-2]))(([0|1|2]\d)|3[0-1])((\d{4})|\d{3}[Xx])$)$/;
+
+	    //如果通过该验证，说明身份证格式正确，但准确性还需计算
+	    if (regIdCard.test(idCard)) {
+	        if (idCard.length == 18) {
+	            var idCardWi = new Array(7, 9, 10, 5, 8, 4, 2, 1, 6, 3, 7, 9, 10, 5, 8, 4, 2); //将前17位加权因子保存在数组里
+	            var idCardY = new Array(1, 0, 10, 9, 8, 7, 6, 5, 4, 3, 2); //这是除以11后，可能产生的11位余数、验证码，也保存成数组
+	            var idCardWiSum = 0; //用来保存前17位各自乖以加权因子后的总和
+	            for (var i = 0; i < 17; i++) {
+	                idCardWiSum += idCard.substring(i, i + 1) * idCardWi[i];
+	            }
+
+	            var idCardMod = idCardWiSum % 11; //计算出校验码所在数组的位置
+	            var idCardLast = idCard.substring(17); //得到最后一位身份证号码
+
+	            //如果等于2，则说明校验码是10，身份证号码最后一位应该是X
+	            if (idCardMod == 2) {
+	                if (idCardLast == 'X' || idCardLast == 'x') {
+	                    return true;
+	                } else {
+	                    return false;
+	                }
+	            } else {
+	                //用计算出的验证码与最后一位身份证号码匹配，如果一致，说明通过，否则是无效的身份证号码
+	                if (idCardLast == idCardY[idCardMod]) {
+	                    return true;
+	                } else {
+	                    return false;
+	                }
+	            }
+	        }
+	    } else {
+	        return false;
+	    }
+	}; //身份证号码判断对错
+	allWay.prototype.isLicenseNo = function (str) {
+	    var express = /^[京津沪渝冀豫云辽黑湘皖鲁新苏浙赣鄂桂甘晋蒙陕吉闽贵粤青藏川宁琼使领A-Z]{1}[A-Z]{1}[警京津沪渝冀豫云辽黑湘皖鲁新苏浙赣鄂桂甘晋蒙陕吉闽贵粤青藏川宁琼]{0,1}[A-Z0-9]{4}[A-Z0-9挂学警港澳]{1}$/;
+	    return express.test(str);
+	}; //判断车牌号正确与否
+	allWay.prototype.isEngine = function (value) {
+	    if (value.length > 0 && value.length < 4 || value.length == 4) {
+	        return false;
+	    }
+	    var reg = /^[0-9a-zA-Z-*\s]+$/;
+	    return reg.test(value);
+	}; //发动机号
+	allWay.prototype.id = function (id) {
+	    return document.getElementById(id);
+	}; //取id
+	allWay.prototype.cookie = function (name, value, options) {
+	    // 如果第二个参数存在
+	    if (typeof value != 'undefined') {
+	        options = options || {};
+	        if (value === null) {
+	            // 设置失效时间
+	            options.expires = -1;
+	        }
+	        var expires = '';
+	        // 如果存在事件参数项，并且类型为 number，或者具体的时间，那么分别设置事件
+	        if (options.expires && (typeof options.expires == 'number' || options.expires.toUTCString)) {
+	            var date;
+	            if (typeof options.expires == 'number') {
+	                date = new Date();
+	                date.setTime(date.getTime() + options.expires * 24 * 60 * 60 * 1000);
+	            } else {
+	                date = options.expires;
+	            }
+	            expires = '; expires=' + date.toUTCString();
+	        }
+	        var path = options.path ? '; path=' + options.path : '',
+
+	        // 设置路径
+	        domain = options.domain ? '; domain=' + options.domain : '',
+
+	        // 设置域
+	        secure = options.secure ? '; secure' : ''; // 设置安全措施，为 true 则直接设置，否则为空
+
+	        // 把所有字符串信息都存入数组，然后调用 join() 方法转换为字符串，并写入 Cookie 信息
+	        document.cookie = [name, '=', encodeURIComponent(value), expires, path, domain, secure].join('');
+	    } else {
+	        // 如果第二个参数不存在
+	        var cookieValue = null;
+	        if (document.cookie && document.cookie != '') {
+	            var cookie = document.cookie.split(';');
+	            for (var i = 0; i < cookie.length; i++) {
+	                var cookie = (cookie[i] || '').replace(/^\s+|\s+$/g, '');
+	                if (cookie.substring(0, name.length + 1) == name + '=') {
+	                    cookieValue = decodeURIComponent(cookie.substring(name.length + 1));
+	                    break;
+	                }
+	            }
+	        }
+	        return cookieValue;
+	    }
+	}; //cookie
+	allWay.prototype.getCookie = function (name) {
+	    var arr,
+	        reg = new RegExp('(^| )' + name + '=([^;]*)(;|$)');
+
+	    if (arr = document.cookie.match(reg)) return arr[2];else return null;
+	}; //cookie
+	allWay.prototype.delCookie = function (name) {
+	    var exp = new Date();
+	    exp.setTime(exp.getTime() - 1);
+	    var cval = getCookie(name);
+	    if (cval != null) document.cookie = name + '=' + cval + ';expires=' + exp.toGMTString();
+	}; //cookie
+	allWay.prototype.chNa = function (str) {
+	    if (str == '') {
+	        return false;
+	    }
+	    var pattern = new RegExp('[`~!@#$^&*()=|{}\':;\',\\[\\].<>/?~！@#￥……&*（）——|{}【】‘；：”“\'。，、？0123456789]');
+	    return !pattern.test(str);
+	}; //验证姓名
+	allWay.prototype.getQueryString = function (name) {
+	    var reg = new RegExp('(^|&)' + name + '=([^&]*)(&|$)', 'i');
+	    var r = window.location.search.substr(1).match(reg);
+	    if (r != null) return unescape(r[2]);return null;
+	}; //url取值
+	allWay.prototype.bankCheck = function (bankno) {
+	    var lastNum = bankno.substr(bankno.length - 1, 1); //取出最后一位（与luhn进行比较）
+
+	    var first15Num = bankno.substr(0, bankno.length - 1); //前15或18位
+	    var newArr = new Array();
+	    for (var i = first15Num.length - 1; i > -1; i--) {
+	        //前15或18位倒序存进数组
+	        newArr.push(first15Num.substr(i, 1));
+	    }
+	    var arrJiShu = new Array(); //奇数位*2的积 <9
+	    var arrJiShu2 = new Array(); //奇数位*2的积 >9
+
+	    var arrOuShu = new Array(); //偶数位数组
+	    for (var j = 0; j < newArr.length; j++) {
+	        if ((j + 1) % 2 == 1) {
+	            //奇数位
+	            if (parseInt(newArr[j]) * 2 < 9) arrJiShu.push(parseInt(newArr[j]) * 2);else arrJiShu2.push(parseInt(newArr[j]) * 2);
+	        } else //偶数位
+	            arrOuShu.push(newArr[j]);
+	    }
+
+	    var jishu_child1 = new Array(); //奇数位*2 >9 的分割之后的数组个位数
+	    var jishu_child2 = new Array(); //奇数位*2 >9 的分割之后的数组十位数
+	    for (var h = 0; h < arrJiShu2.length; h++) {
+	        jishu_child1.push(parseInt(arrJiShu2[h]) % 10);
+	        jishu_child2.push(parseInt(arrJiShu2[h]) / 10);
+	    }
+
+	    var sumJiShu = 0; //奇数位*2 < 9 的数组之和
+	    var sumOuShu = 0; //偶数位数组之和
+	    var sumJiShuChild1 = 0; //奇数位*2 >9 的分割之后的数组个位数之和
+	    var sumJiShuChild2 = 0; //奇数位*2 >9 的分割之后的数组十位数之和
+	    var sumTotal = 0;
+	    for (var m = 0; m < arrJiShu.length; m++) {
+	        sumJiShu = sumJiShu + parseInt(arrJiShu[m]);
+	    }
+
+	    for (var n = 0; n < arrOuShu.length; n++) {
+	        sumOuShu = sumOuShu + parseInt(arrOuShu[n]);
+	    }
+
+	    for (var p = 0; p < jishu_child1.length; p++) {
+	        sumJiShuChild1 = sumJiShuChild1 + parseInt(jishu_child1[p]);
+	        sumJiShuChild2 = sumJiShuChild2 + parseInt(jishu_child2[p]);
+	    }
+	    //计算总和
+	    sumTotal = parseInt(sumJiShu) + parseInt(sumOuShu) + parseInt(sumJiShuChild1) + parseInt(sumJiShuChild2);
+
+	    //计算luhn值
+	    var k = parseInt(sumTotal) % 10 == 0 ? 10 : parseInt(sumTotal) % 10;
+	    var luhn = 10 - k;
+
+	    if (lastNum == luhn) {
+
+	        return true;
+	    } else {
+
+	        return false;
+	    }
+	};
+	var wait = 60;
+	allWay.prototype.time = function (o) {
+	    if (wait == 0) {
+	        o.setAttribute('disabled', '');
+	        o.value = '发送验证码';
+	        wait = 60;
+	    } else {
+	        o.setAttribute('disabled', 'disabled');
+	        o.value = wait + 's';
+	        wait--;
+	        setTimeout(function () {
+	            allWay.prototype.time(o);
+	        }, 1000);
+	    }
+	};
+
+	module.exports = allWay;
+
+	/* REACT HOT LOADER */ }).call(this); } finally { if (true) { (function () { var foundReactClasses = module.hot.data && module.hot.data.foundReactClasses || false; if (module.exports && module.makeHot) { var makeExportsHot = __webpack_require__(228); if (makeExportsHot(module, __webpack_require__(69))) { foundReactClasses = true; } var shouldAcceptModule = true && foundReactClasses; if (shouldAcceptModule) { module.hot.accept(function (err) { if (err) { console.error("Cannot not apply hot update to " + "publicFun.js" + ": " + err.message); } }); } } module.hot.dispose(function (data) { data.makeHot = module.makeHot; data.foundReactClasses = foundReactClasses; }); })(); } }
+	/* WEBPACK VAR INJECTION */}.call(exports, __webpack_require__(4)(module)))
+
+/***/ },
+/* 239 */
+/***/ function(module, exports, __webpack_require__) {
+
+	/* WEBPACK VAR INJECTION */(function(module) {/* REACT HOT LOADER */ if (true) { (function () { var ReactHotAPI = __webpack_require__(5), RootInstanceProvider = __webpack_require__(13), ReactMount = __webpack_require__(15), React = __webpack_require__(69); module.makeHot = module.hot.data ? module.hot.data.makeHot : ReactHotAPI(function () { return RootInstanceProvider.getRootInstances(ReactMount); }, React); })(); } try { (function () {
+
+	/**
+	 * Created by gongchuangshidai on 16/11/7.
+	 */
+	'use strict';
+
+	var React = __webpack_require__(69);
+
+	var _require = __webpack_require__(171);
+
+	var Router = _require.Router;
+	var Route = _require.Route;
+	var Link = _require.Link;
+	var browserHistory = _require.browserHistory;
+
+	var Load = React.createClass({
+	    displayName: 'Load',
+
+	    render: function render() {
+	        return React.createElement('div', { className: 'loading', id: 'load', style: { display: 'none' } }, React.createElement('div', { className: 'imgbox' }, React.createElement('img', { src: '../../../img/loading.png', alt: '' })));
+	    }
+	});
+	module.exports = Load;
+
+	/* REACT HOT LOADER */ }).call(this); } finally { if (true) { (function () { var foundReactClasses = module.hot.data && module.hot.data.foundReactClasses || false; if (module.exports && module.makeHot) { var makeExportsHot = __webpack_require__(228); if (makeExportsHot(module, __webpack_require__(69))) { foundReactClasses = true; } var shouldAcceptModule = true && foundReactClasses; if (shouldAcceptModule) { module.hot.accept(function (err) { if (err) { console.error("Cannot not apply hot update to " + "Nextpage.js" + ": " + err.message); } }); } } module.hot.dispose(function (data) { data.makeHot = module.makeHot; data.foundReactClasses = foundReactClasses; }); })(); } }
+	/* WEBPACK VAR INJECTION */}.call(exports, __webpack_require__(4)(module)))
+
+/***/ },
+/* 240 */
 /***/ function(module, exports, __webpack_require__) {
 
 	/* WEBPACK VAR INJECTION */(function(module) {/* REACT HOT LOADER */ if (true) { (function () { var ReactHotAPI = __webpack_require__(5), RootInstanceProvider = __webpack_require__(13), ReactMount = __webpack_require__(15), React = __webpack_require__(69); module.makeHot = module.hot.data ? module.hot.data.makeHot : ReactHotAPI(function () { return RootInstanceProvider.getRootInstances(ReactMount); }, React); })(); } try { (function () {
@@ -28711,22 +28789,210 @@
 
 	var Router = _require.Router;
 	var Link = _require.Link;
-	var History = _require.History;
+	var browserHistory = _require.browserHistory;
 
-	var Back = __webpack_require__(237);
-	var TbcarDe = __webpack_require__(242);
+	var url = __webpack_require__(237);
 
-	var Tbcar = React.createClass({
-	    displayName: 'Tbcar',
+	var allWay = __webpack_require__(238);
+	var Back = __webpack_require__(241); //slider广告banner
+	var TbPro = __webpack_require__(242);
+	var reqwest = __webpack_require__(235);
+	var Load = __webpack_require__(239);
+	var $ = new allWay();
 
-	    componentDidMount: function componentDidMount() {},
+	var dateTime = 30;
+	var TbMsg = React.createClass({
+	    displayName: 'TbMsg',
+
+	    getInitialState: function getInitialState() {
+	        return {
+	            city: null,
+	            carId: null,
+	            phone: null,
+	            isUserid: false,
+	            userid: null
+	        };
+	    },
+	    componentDidMount: function componentDidMount() {
+
+	        var opid = $.getCookie('opid');
+	        var token = $.getCookie('token');
+
+	        var proWrap = $.id('proWrap'),
+	            pro = $.id('pro'),
+	            h = -proWrap.offsetHeight + 'px',
+	            tTop = $.id('tTop'),
+	            sure = $.id('sure'),
+	            nextPage = $.id('nextPage'); //下一页
+
+	        $.id('load').style.display = 'none';
+
+	        pro.onclick = function () {
+	            tTop.style.position = 'fixed';
+	            tTop.style.top = 0;
+	            proWrap.style.bottom = 0;
+	            sure.style.display = 'block';
+	            nextPage.style.display = 'none';
+	        };
+	    },
+	    saveData: function saveData(event) {
+	        var tar = event.currentTarget;
+	        tar.style.backgroundColor = '#5A7CDD';
+
+	        var cityval = React.findDOMNode(this.refs.cityval),
+	            carId = React.findDOMNode(this.refs.carId),
+	            iphoneNum = React.findDOMNode(this.refs.iphoneNum),
+	            data = {},
+	            _this = this;
+
+	        var opid = $.getCookie('opid'),
+	            token = $.getCookie('token'),
+	            base = btoa(opid + ':' + token);
+
+	        if (cityval.innerHTML == '') {
+	            alert('请输入投保城市');
+	            return;
+	        }
+	        if (!$.isLicenseNo(carId.value.toUpperCase())) {
+	            alert('请输入正确的车牌号');
+	            return;
+	        }
+	        if (!$.isPhone(iphoneNum.value)) {
+	            alert('请输入正确的手机号');
+	            return;
+	        }
+	        if ($.id('recode').value == '') {
+	            alert('请输入验证码');
+	        }
+	        data.opid = opid;
+	        data.code = $.id('recode').value;
+	        data.city = cityval.getAttribute('data');
+	        data.cityName = cityval.innerHTML;
+	        data.car_no = carId.value.toUpperCase();
+	        data.phone = iphoneNum.value;
+	        data.ins_id = '1';
+
+	        $.cookie('comcode', data.city, { path: '/' });
+	        reqwest({
+	            url: url + 'V1/carone',
+	            method: 'post',
+	            data: data,
+	            headers: {
+	                'Authorization': 'Basic ' + base,
+	                'Accept': 'application/json, text/plain, */*'
+	            },
+	            success: function success(xrh) {
+	                if (xrh.code == 0) {
+	                    $.id('load').style.display = 'block';
+	                    $.cookie('cityName', data.cityName, { path: '/', expires: dateTime });
+	                    $.cookie('city', data.city, { path: '/', expires: dateTime });
+	                    $.cookie('carId', data.car_no, { path: '/', expires: dateTime });
+	                    $.cookie('userPhone', data.phone, { path: '/', expires: dateTime });
+	                    browserHistory.push('/car/' + xrh.id);
+	                } else {
+	                    alert(xrh.msg);
+	                }
+	            }
+	        });
+	    },
+	    getcodeClick: function getcodeClick() {
+	        var opid = $.getCookie('opid'),
+	            token = $.getCookie('token'),
+	            base = btoa(opid + ':' + token);
+	        var phone = $.id('iphoneNum').value;
+	        if (phone == '') {
+	            alert('请输入手机号');
+	            return;
+	        }
+	        reqwest({
+	            url: url + 'V1/code',
+	            method: 'post',
+	            data: {
+	                type: 'reg',
+	                phone: phone
+	            },
+	            headers: {
+	                'Authorization': 'Basic ' + base,
+	                'Accept': 'application/json, text/plain, */*'
+	            },
+	            success: function success(xrh) {
+	                if (xrh.code == 0) {
+	                    $.time($.id('getcode'));
+	                } else {
+	                    alert(xrh.msg);
+	                }
+	            }
+	        });
+	    },
+	    moveColor: function moveColor(event) {
+	        var tar = event.currentTarget;
+	        tar.style.backgroundColor = '#5576d4';
+	    },
 	    render: function render() {
-	        return React.createElement('div', { className: 'tb-car' }, React.createElement(Back, { tit: '验证信息', url: '/msg' }), React.createElement('ul', { className: 'tb-det' }, React.createElement('li', { className: 'clearfix' }, React.createElement('b', null, '车型'), React.createElement('span', null, '奥迪Q5 2015手自一体 尊享版'), React.createElement('i', { className: 'iconfont pull-right' }, '>')), React.createElement('li', null, React.createElement('b', null, '车架号'), React.createElement('span', null, React.createElement('input', { className: 'value', type: 'text', placeholder: '请输入17位车架号', maxlength: '17' }))), React.createElement('li', null, React.createElement('b', null, '发动机号'), React.createElement('span', null, React.createElement('input', { className: 'value', type: 'tel', placeholder: '请输入发动机号' }))), React.createElement('li', { className: 'clearfix' }, React.createElement('b', null, '注册日期'), React.createElement('span', null), React.createElement('i', { className: 'iconfont pull-right' }, '>')), React.createElement('li', { className: 'clearfix' }, React.createElement('b', null, '是否过户'), React.createElement('div', { className: 'button' }, React.createElement('span', { className: 'circle' })))), React.createElement('h4', { className: 'se-tit' }, '车辆信息'), React.createElement('ul', { className: 'tb-det' }, React.createElement('li', null, React.createElement('b', null, '姓名'), React.createElement('span', null, React.createElement('input', { className: 'value', type: 'text', placeholder: '请输入本人真实姓名', maxlength: '17' }))), React.createElement('li', null, React.createElement('b', null, '身份证号'), React.createElement('span', null, React.createElement('input', { className: 'value', type: 'tel', placeholder: '请输入本人身份证号' })))), React.createElement('a', { href: '', className: 'abtn' }, '下一步'), React.createElement(TbcarDe, null));
+	        if (this.state.isUserid) {
+	            var id = this.state.userid;
+	        };
+	        var cityName = '',
+	            city = '',
+	            carId = '',
+	            userPhone = '';
+	        if ($.getCookie('cityName') != null) {
+	            cityName = decodeURIComponent($.getCookie('cityName'), 'utf-8');
+	            city = $.getCookie('city');
+	            carId = decodeURIComponent($.getCookie('carId'), 'utf-8');
+	            userPhone = $.getCookie('userPhone');
+	        }
+	        return React.createElement('div', { className: 'tb-msg' }, React.createElement(Back, { tit: '投保信息', url: '/' }), React.createElement('ul', { className: 'tb-det' }, React.createElement('li', { className: 'clearfix', id: 'pro' }, React.createElement('b', null, '投保城市'), React.createElement('span', { id: 'cityval', ref: 'cityval', data: city }, cityName), React.createElement('i', { className: 'iconfont', style: { float: 'right' } }, '')), React.createElement('li', null, React.createElement('b', null, '车牌号'), React.createElement('span', null, React.createElement('input', { id: 'carId', ref: 'carId', defaultValue: carId, className: 'value', type: 'text', placeholder: '请输入车牌信息', maxLength: '7', style: { textTransform: 'uppercase' } }))), React.createElement('li', null, React.createElement('b', null, '手机号'), React.createElement('span', null, React.createElement('input', { id: 'iphoneNum', ref: 'iphoneNum', defaultValue: userPhone, className: 'value', type: 'tel', placeholder: '请输入11位手机号码', maxLength: '11' }))), React.createElement('li', { className: 'clearfix' }, React.createElement('b', null, '验证码'), React.createElement('span', { style: { width: '9rem' } }, React.createElement('input', { id: 'recode', ref: 'recode', className: 'value', type: 'tel', placeholder: '请输入收到的验证码' })), React.createElement('input', { type: 'button', id: 'getcode', value: '获取验证码', disabled: '', className: 'button pull-right', onClick: this.getcodeClick }))), React.createElement('h4', { className: 'se-tit' }, '保险公司'), React.createElement('ul', { className: 'companys' }, React.createElement('li', null, React.createElement('b', null, '大地保险'), React.createElement('i', { className: 'iconfont pull-right' }, ''))), React.createElement(Link, { className: 'abtn fixfor', id: 'nextPage',
+	            onTouchStart: this.moveColor,
+	            onTouchEnd: this.saveData }, '下一步'), React.createElement(Load, null), React.createElement(TbPro, null));
 	    }
 	});
-	module.exports = Tbcar;
+	module.exports = TbMsg;
 
-	/* REACT HOT LOADER */ }).call(this); } finally { if (true) { (function () { var foundReactClasses = module.hot.data && module.hot.data.foundReactClasses || false; if (module.exports && module.makeHot) { var makeExportsHot = __webpack_require__(228); if (makeExportsHot(module, __webpack_require__(69))) { foundReactClasses = true; } var shouldAcceptModule = true && foundReactClasses; if (shouldAcceptModule) { module.hot.accept(function (err) { if (err) { console.error("Cannot not apply hot update to " + "tbcar.js" + ": " + err.message); } }); } } module.hot.dispose(function (data) { data.makeHot = module.makeHot; data.foundReactClasses = foundReactClasses; }); })(); } }
+	/* REACT HOT LOADER */ }).call(this); } finally { if (true) { (function () { var foundReactClasses = module.hot.data && module.hot.data.foundReactClasses || false; if (module.exports && module.makeHot) { var makeExportsHot = __webpack_require__(228); if (makeExportsHot(module, __webpack_require__(69))) { foundReactClasses = true; } var shouldAcceptModule = true && foundReactClasses; if (shouldAcceptModule) { module.hot.accept(function (err) { if (err) { console.error("Cannot not apply hot update to " + "tbmsg.js" + ": " + err.message); } }); } } module.hot.dispose(function (data) { data.makeHot = module.makeHot; data.foundReactClasses = foundReactClasses; }); })(); } }
+	/* WEBPACK VAR INJECTION */}.call(exports, __webpack_require__(4)(module)))
+
+/***/ },
+/* 241 */
+/***/ function(module, exports, __webpack_require__) {
+
+	/* WEBPACK VAR INJECTION */(function(module) {/* REACT HOT LOADER */ if (true) { (function () { var ReactHotAPI = __webpack_require__(5), RootInstanceProvider = __webpack_require__(13), ReactMount = __webpack_require__(15), React = __webpack_require__(69); module.makeHot = module.hot.data ? module.hot.data.makeHot : ReactHotAPI(function () { return RootInstanceProvider.getRootInstances(ReactMount); }, React); })(); } try { (function () {
+
+	/**
+	 * Created by dell on 2016/10/25.
+	 */
+	'use strict';
+
+	var React = __webpack_require__(69);
+
+	var _require = __webpack_require__(171);
+
+	var Router = _require.Router;
+	var Route = _require.Route;
+	var Link = _require.Link;
+	var browserHistory = _require.browserHistory;
+
+	var Back = React.createClass({
+	    displayName: 'Back',
+
+	    moveColor: function moveColor(event) {
+	        var tar = event.currentTarget;
+	        tar.style.backgroundColor = '#5576d4';
+	    },
+	    leaveColor: function leaveColor(event) {
+	        var tar = event.currentTarget;
+	        tar.style.backgroundColor = '#5A7CDD';
+	    },
+	    render: function render() {
+	        return React.createElement(Link, { href: 'javascript:history.back(-1)', className: 'goback',
+	            onTouchStart: this.moveColor,
+	            onTouchEnd: this.leaveColor
+	        }, React.createElement('i', { className: 'iconfont pull-left' }, ''), this.props.tit);
+	    }
+	});
+	module.exports = Back;
+
+	/* REACT HOT LOADER */ }).call(this); } finally { if (true) { (function () { var foundReactClasses = module.hot.data && module.hot.data.foundReactClasses || false; if (module.exports && module.makeHot) { var makeExportsHot = __webpack_require__(228); if (makeExportsHot(module, __webpack_require__(69))) { foundReactClasses = true; } var shouldAcceptModule = true && foundReactClasses; if (shouldAcceptModule) { module.hot.accept(function (err) { if (err) { console.error("Cannot not apply hot update to " + "goback.js" + ": " + err.message); } }); } } module.hot.dispose(function (data) { data.makeHot = module.makeHot; data.foundReactClasses = foundReactClasses; }); })(); } }
 	/* WEBPACK VAR INJECTION */}.call(exports, __webpack_require__(4)(module)))
 
 /***/ },
@@ -28738,6 +29004,344 @@
 	/**
 	 * Created by gongchuangshidai on 16/10/10.
 	 */
+
+	'use strict';
+
+	var data = [{
+	    value: '110100',
+	    city: '北京',
+	    car: '京'
+	}, {
+	    value: '120100',
+	    city: '天津',
+	    car: '津'
+	}, {
+	    value: '310100',
+	    city: '上海',
+	    car: '沪'
+	}, {
+	    value: '500100',
+	    city: '重庆',
+	    car: '渝'
+	}, {
+	    value: '130000',
+	    city: '河北',
+	    car: '冀'
+	}, {
+	    value: '140000',
+	    city: '山西',
+	    car: '晋'
+	}, {
+	    value: '150000',
+	    city: '内蒙古',
+	    car: '蒙'
+	}, {
+	    value: '210000',
+	    city: '辽宁',
+	    car: '辽'
+	}, {
+	    value: '220000',
+	    city: '吉林',
+	    car: '吉'
+	}, {
+	    value: '230000',
+	    city: '黑龙江'
+	}, {
+	    value: '320000',
+	    city: '江苏',
+	    car: '苏'
+	}, {
+	    value: '330000',
+	    city: '浙江',
+	    car: '浙'
+	}, {
+	    value: '340000',
+	    city: '安徽',
+	    car: '皖'
+	}, {
+	    value: '350000',
+	    city: '福建',
+	    car: '闽'
+	}, {
+	    value: '360000',
+	    city: '江西',
+	    car: '赣'
+	}, {
+	    value: '370000',
+	    city: '山东',
+	    car: '鲁'
+	}, {
+	    value: '410000',
+	    city: '河南',
+	    car: '豫'
+	}, {
+	    value: '420000',
+	    city: '湖北',
+	    car: '鄂'
+	}, {
+	    value: '430000',
+	    city: '湖南',
+	    car: '湘'
+	}, {
+	    value: '440000',
+	    city: '广东',
+	    car: '粤'
+	}, {
+	    value: '450000',
+	    city: '广西',
+	    car: '桂'
+	}, {
+	    value: '460000',
+	    city: '海南',
+	    car: '琼'
+	}, {
+	    value: '510000',
+	    city: '四川',
+	    car: '川'
+	}, {
+	    value: '520000',
+	    city: '贵州',
+	    car: '贵'
+	}, {
+	    value: '530000',
+	    city: '云南',
+	    car: '云'
+	}, {
+	    value: '540000',
+	    city: '西藏',
+	    car: '藏'
+	}, {
+	    value: '610000',
+	    city: '陕西',
+	    car: '陕'
+	}, {
+	    value: '620000',
+	    city: '甘肃',
+	    car: '甘'
+	}, {
+	    value: '630000',
+	    city: '青海',
+	    car: '青'
+	}, {
+	    value: '640000',
+	    city: '宁夏',
+	    car: '川'
+	}, {
+	    value: '650000',
+	    city: '新疆',
+	    car: '新'
+	}];
+
+	var React = __webpack_require__(69);
+
+	var _require = __webpack_require__(171);
+
+	var Router = _require.Router;
+	var Link = _require.Link;
+	var browserHistory = _require.browserHistory;
+
+	var url = __webpack_require__(237);
+	var reqwest = __webpack_require__(235);
+	var GoBack = __webpack_require__(243);
+	var allWay = __webpack_require__(238);
+
+	var Load = __webpack_require__(239);
+
+	var Tbpro = React.createClass({
+	    displayName: 'Tbpro',
+
+	    getInitialState: function getInitialState() {
+	        return {
+	            isCity: false,
+	            citys: null,
+	            icon: 0,
+	            cityName: null
+	        };
+	    },
+	    componentDidMount: function componentDidMount() {
+	        var $ = new allWay();
+	        var tTop = $.id('tTop'),
+	            proWrap = $.id('proWrap'),
+	            h = -proWrap.offsetHeight + 'px',
+	            sure = $.id('sure'),
+	            nextPage = $.id('nextPage');
+
+	        proWrap.style.bottom = h;
+
+	        tTop.onclick = function () {
+	            close();
+	        };
+	        sure.onclick = function () {
+	            var cityval = $.id('cityval');
+	            var cityClass, cName, comcode;
+	            cityClass = $.id('checked');
+	            if (cityClass != null) {
+	                cName = cityClass.parentNode.childNodes[0].innerHTML;
+	                comcode = cityClass.parentNode.getAttribute('data');
+	            } else {
+	                alert('请选择城市');
+	            }
+
+	            if (cName != undefined) {
+	                cityval.innerHTML = cName;
+	                cityval.setAttribute('data', comcode);
+	                close();
+	            }
+	        };
+
+	        function close() {
+	            tTop.style.position = 'relative';
+	            proWrap.style.bottom = h;
+	            sure.style.display = 'none';
+	            nextPage.style.display = 'block';
+	        }
+	    },
+	    proClick: function proClick(event) {
+	        var $ = new allWay();
+	        var pro = event.currentTarget,
+	            ph = pro.parentNode.style.height,
+	            city = pro.parentNode.getAttribute('value'),
+	            _this = this,
+	            allpro = $.id('allpro').children;
+
+	        var opid = $.getCookie('opid'),
+	            token = $.getCookie('token'),
+	            base = btoa(opid + ':' + token);
+
+	        for (var i = 0, len = allpro.length; i < len; i++) {
+	            allpro[i].style.height = 2.2 + 'rem';
+	            allpro[i].childNodes[1].innerHTML = '<pre class="iconfont">&#xe603;</pre>';
+	        }
+
+	        if (ph == 'auto') {
+	            pro.parentNode.style.height = 2.2 + 'rem';
+
+	            pro.parentNode.childNodes[1].innerHTML = '<pre class="iconfont">&#xe603;</pre>';
+	        } else {
+	            $.id('load').style.display = 'block';
+	            pro.parentNode.childNodes[1].innerHTML = '<pre class="iconfont">&#xe604;</pre>';
+
+	            reqwest({
+	                url: url + 'V1/city',
+	                method: 'get',
+	                data: {
+	                    city_name: city
+	                },
+	                headers: {
+	                    'Authorization': 'Basic ' + base,
+	                    'Accept': 'application/json, text/plain, */*'
+	                },
+	                success: function success(xrh) {
+	                    $.id('load').style.display = 'none';
+	                    if (_this.isMounted()) {
+	                        _this.setState({
+	                            isCity: true,
+	                            citys: xrh.list.menu
+	                        });
+	                    }
+	                }
+	            });
+	            pro.parentNode.style.height = 'auto';
+	        }
+	    },
+	    checkCity: function checkCity(event) {
+	        var ch = event.currentTarget;
+	        var sure = React.findDOMNode(this.refs.sure);
+	        var gou = document.getElementsByClassName('gou');
+
+	        for (var i = 0, len = gou.length; i < len; i++) {
+	            gou[i].innerHTML = '';
+	            gou[i].id = '';
+	        }
+
+	        var val = ch.parentNode.parentNode.getAttribute('data');
+	        var carId = document.getElementById('carId');
+
+	        carId.value = val;
+
+	        ch.childNodes[1].innerHTML = '<pre class="iconfont check">&#xe600;</pre>';
+	        ch.childNodes[1].id = 'checked';
+	    },
+	    moveColor: function moveColor(event) {
+	        var tar = event.currentTarget;
+	        console.log(tar);
+	        tar.style.backgroundColor = '#5576d4';
+	    },
+	    leaveColor: function leaveColor(event) {
+	        var tar = event.currentTarget;
+	        tar.style.backgroundColor = '#5A7CDD';
+	    },
+	    render: function render() {
+	        var _this = this;
+	        if (this.state.isCity) {
+	            var allcity = _this.state.citys.map(function (item) {
+	                return React.createElement('dd', { onClick: _this.checkCity, data: item.comcode }, item.comname, React.createElement('i', { className: 'pull-right gou' }));
+	            }, _this);
+	        }
+	        return React.createElement('div', { className: 'proWrap', id: 'proWrap' }, React.createElement('div', { className: 'tb-carlist', id: 'prolist', ref: 'prolist' }, React.createElement(GoBack, { tit: '投保城市', id: 'tTop' }), React.createElement('h4', { className: 'se-tit', style: { paddingTop: '2rem' } }, '现已开通投保城市及地区如下：'), React.createElement('ul', { className: 'tb-allpro', id: 'allpro' }, data.map(function (item) {
+	            return React.createElement('li', { className: 'clearfix tb-pro', id: 'pro', ref: 'pro', data: item.car, value: item.city }, React.createElement('h4', { onClick: this.proClick }, item.city), React.createElement('i', { className: 'pull-right', ref: 'more', id: 'more' }, React.createElement('pre', { className: 'iconfont' }, '')), React.createElement('dl', null, allcity));
+	        }, this))), React.createElement(Link, { className: 'abtn', ref: 'sure', id: 'sure', onTouchStart: this.moveColor,
+	            onTouchEnd: this.leaveColor
+	        }, '确定'), React.createElement(Load, null));
+	    }
+	});
+	module.exports = Tbpro;
+
+	/* REACT HOT LOADER */ }).call(this); } finally { if (true) { (function () { var foundReactClasses = module.hot.data && module.hot.data.foundReactClasses || false; if (module.exports && module.makeHot) { var makeExportsHot = __webpack_require__(228); if (makeExportsHot(module, __webpack_require__(69))) { foundReactClasses = true; } var shouldAcceptModule = true && foundReactClasses; if (shouldAcceptModule) { module.hot.accept(function (err) { if (err) { console.error("Cannot not apply hot update to " + "tbpro.js" + ": " + err.message); } }); } } module.hot.dispose(function (data) { data.makeHot = module.makeHot; data.foundReactClasses = foundReactClasses; }); })(); } }
+	/* WEBPACK VAR INJECTION */}.call(exports, __webpack_require__(4)(module)))
+
+/***/ },
+/* 243 */
+/***/ function(module, exports, __webpack_require__) {
+
+	/* WEBPACK VAR INJECTION */(function(module) {/* REACT HOT LOADER */ if (true) { (function () { var ReactHotAPI = __webpack_require__(5), RootInstanceProvider = __webpack_require__(13), ReactMount = __webpack_require__(15), React = __webpack_require__(69); module.makeHot = module.hot.data ? module.hot.data.makeHot : ReactHotAPI(function () { return RootInstanceProvider.getRootInstances(ReactMount); }, React); })(); } try { (function () {
+
+	/**
+	 * Created by dell on 2016/10/25.
+	 */
+	'use strict';
+
+	var React = __webpack_require__(69);
+
+	var _require = __webpack_require__(171);
+
+	var Router = _require.Router;
+	var Route = _require.Route;
+	var Link = _require.Link;
+	var browserHistory = _require.browserHistory;
+
+	var Back = React.createClass({
+	    displayName: 'Back',
+
+	    moveColor: function moveColor(event) {
+	        var tar = event.currentTarget;
+	        tar.style.backgroundColor = '#5576d4';
+	    },
+	    leaveColor: function leaveColor(event) {
+	        var tar = event.currentTarget;
+	        tar.style.backgroundColor = '#5A7CDD';
+	    },
+	    render: function render() {
+	        return React.createElement(Link, { className: 'goback', id: this.props.id, ref: this.props.ref,
+	            onTouchStart: this.moveColor,
+	            onTouchEnd: this.leaveColor
+	        }, React.createElement('i', { className: 'iconfont pull-left' }, ''), this.props.tit);
+	    }
+	});
+	module.exports = Back;
+
+	/* REACT HOT LOADER */ }).call(this); } finally { if (true) { (function () { var foundReactClasses = module.hot.data && module.hot.data.foundReactClasses || false; if (module.exports && module.makeHot) { var makeExportsHot = __webpack_require__(228); if (makeExportsHot(module, __webpack_require__(69))) { foundReactClasses = true; } var shouldAcceptModule = true && foundReactClasses; if (shouldAcceptModule) { module.hot.accept(function (err) { if (err) { console.error("Cannot not apply hot update to " + "back.js" + ": " + err.message); } }); } } module.hot.dispose(function (data) { data.makeHot = module.makeHot; data.foundReactClasses = foundReactClasses; }); })(); } }
+	/* WEBPACK VAR INJECTION */}.call(exports, __webpack_require__(4)(module)))
+
+/***/ },
+/* 244 */
+/***/ function(module, exports, __webpack_require__) {
+
+	/* WEBPACK VAR INJECTION */(function(module) {/* REACT HOT LOADER */ if (true) { (function () { var ReactHotAPI = __webpack_require__(5), RootInstanceProvider = __webpack_require__(13), ReactMount = __webpack_require__(15), React = __webpack_require__(69); module.makeHot = module.hot.data ? module.hot.data.makeHot : ReactHotAPI(function () { return RootInstanceProvider.getRootInstances(ReactMount); }, React); })(); } try { (function () {
+
+	/**
+	 * Created by gongchuangshidai on 16/10/10.
+	 */
 	'use strict';
 
 	var React = __webpack_require__(69);
@@ -28746,48 +29350,1785 @@
 
 	var Router = _require.Router;
 	var Link = _require.Link;
-	var History = _require.History;
+	var browserHistory = _require.browserHistory;
 
-	var reqwest = __webpack_require__(239);
-	var url = __webpack_require__(236);
+	var url = __webpack_require__(237);
 
-	var cars = ['大众', '奔驰', '宝马', '凯迪拉克', '日产', '福特', '别克', '雪弗兰', '捷豹', '起亚'];
+	var Back = __webpack_require__(241);
+	var TbcarDe = __webpack_require__(245);
+	var allWay = __webpack_require__(238);
+	var reqwest = __webpack_require__(235);
+	var Load = __webpack_require__(239);
+
+	var $ = new allWay();
+	var dateTime = 30;
+
+	var Tbcar = React.createClass({
+	    displayName: 'Tbcar',
+
+	    getInitialState: function getInitialState() {
+	        return {
+	            isCircle: true
+	        };
+	    },
+	    componentDidMount: function componentDidMount() {
+	        var carMsg = React.findDOMNode(this.refs.carMsg),
+	            carWrap = $.id('carWrap'),
+	            tTop = $.id('tTop');
+	        tTop.style.display = 'none';
+	        carMsg.onclick = function () {
+	            tTop.style.position = 'fixed';
+	            tTop.style.top = 0;
+	            tTop.style.display = 'block';
+	            carWrap.style.bottom = 0 + '%';
+	        };
+
+	        var getDate = $.id('getDate');
+	        getDate.onclick = function () {
+	            editDate(event);
+	        };
+	        $.id('getDate3').onclick = function () {
+	            editDate(event);
+	        };
+	        $.id('transfer').onclick = function () {
+	            editDate(event);
+	        };
+	    },
+	    checkMsgClick: function checkMsgClick(event) {
+	        var tar = event.currentTarget;
+	        tar.style.backgroundColor = '#5A7CDD';
+	        var _this = this;
+
+	        var $ = new allWay(),
+	            data = {},
+	            date = React.findDOMNode(this.refs.date),
+
+	        //注册日期
+	        carCode = React.findDOMNode(this.refs.carCode),
+
+	        //车架号
+	        engine = React.findDOMNode(this.refs.engine),
+
+	        //发动机号
+	        idcard = React.findDOMNode(this.refs.idcard),
+
+	        //身份证
+	        moveCircle = React.findDOMNode(this.refs.moveCircle),
+
+	        //是否过户
+	        nameGet = React.findDOMNode(this.refs.nameGet),
+
+	        //姓名
+	        carMsg = React.findDOMNode(this.refs.carMsg),
+
+	        //车型
+	        changedate = React.findDOMNode(this.refs.changedate),
+
+	        //过户日期
+	        effect_time = React.findDOMNode(this.refs.date2); //保单生效日期
+
+	        var opid = $.getCookie('opid'),
+	            token = $.getCookie('token'),
+	            base = btoa(opid + ':' + token);
+
+	        var now = new Date().getTime();
+	        var arr1 = date.value.split('-'); // 注册日期
+	        var arr2 = changedate.value.split('-'); //过户日期
+	        var arr3 = effect_time.value.split('-'); //保单生效日期
+
+	        var oldtimes1 = new Date(parseFloat(arr1[0]), parseFloat(arr1[1]), parseFloat(arr1[2])).getTime();
+	        var oldtimes2 = new Date(parseFloat(arr2[0]), parseFloat(arr2[1]), parseFloat(arr2[2])).getTime();
+	        var oldtimes3 = new Date(parseFloat(arr3[0]), parseFloat(arr3[1]), parseFloat(arr3[2]) - 1).getTime();
+
+	        if (carMsg.innerHTML == '') {
+	            alert('请选择车型');
+	            return;
+	        }
+	        if (!$.getCheckCode(carCode.value.toUpperCase())) {
+	            alert('请输入正确的车架号');
+	            return;
+	        }
+	        if (!$.isEngine(engine.value.toUpperCase())) {
+	            alert('请输入正确的发动机号');
+	            return;
+	        }
+	        if (date.value == '') {
+	            alert('请选择注册时间');
+	            return;
+	        } else if (oldtimes1 > now) {
+	            alert('车辆注册日期必须早于今天');
+	            return;
+	        }
+	        if (effect_time.value == '') {
+	            alert('请选择保单生效日期');
+	            return;
+	        } else if (oldtimes3 < now) {
+	            alert('保单生效日期必须晚于今天');
+	            return;
+	        }
+	        if (changedate.value != '') {
+	            if (oldtimes2 < oldtimes1) {
+	                alert('车辆过户日期必须晚于注册日期');
+	                return;
+	            }
+	        }
+
+	        if (date.effect_time == '') {
+	            alert('请选择保单生效时间');
+	            return;
+	        }
+	        if (moveCircle.id == '1') {}
+	        if (!$.chNa(nameGet.value)) {
+	            alert('请输入姓名');
+	            return;
+	        }
+	        if (!$.validateIdCard(idcard.value.toUpperCase())) {
+	            alert('请输入正确格式的身份证号');
+	            return;
+	        }
+
+	        $.id('load').style.display = 'block';
+
+	        //获取数据并且跳到下一个页面
+	        data.opid = opid;
+	        data.car_type = carMsg.innerHTML;
+	        data.car_id = carMsg.getAttribute('data');
+	        data.vin = carCode.value.toUpperCase();
+	        data.edg_no = engine.value.toUpperCase();
+	        data.log_time = date.value;
+	        data.transfer = moveCircle.id;
+	        data.tra_time = changedate.value;
+	        data.name = nameGet.value;
+	        data.card_no = idcard.value.toUpperCase();
+	        data.purchasePrice = carMsg.getAttribute('value');
+	        data.seatNoForCheck = carMsg.className;
+	        data.id = this.props.params.userId;
+	        data.effect_time = effect_time.value;
+	        console.log(data);
+	        reqwest({
+	            url: url + 'V1/cartwo',
+	            method: 'POST',
+	            data: data,
+	            headers: {
+	                'Authorization': 'Basic ' + base,
+	                'Accept': 'application/json, text/plain, */*'
+	            },
+	            success: function success(resp) {
+
+	                $.cookie('seat', data.seatNoForCheck - 1, { path: '/', expires: dateTime }); //座位号
+	                $.cookie('chanceId', resp.list, { path: '/', expires: dateTime }); //null
+	                $.cookie('userName', data.name, { path: '/', expires: dateTime }); //姓名
+	                $.cookie('idcard', data.card_no, { path: '/', expires: dateTime }); //身份证
+	                $.cookie('effect_time', data.effect_time, { path: '/', expires: dateTime }); //保单生效时间
+	                $.cookie('log_time', data.log_time, { path: '/', expires: dateTime }); //注册日期
+	                $.cookie('edg_no', data.edg_no, { path: '/', expires: dateTime }); //发动机号
+	                $.cookie('vin', data.vin, { path: '/', expires: dateTime }); //车架号
+	                $.cookie('car_id', data.car_id, { path: '/', expires: dateTime }); //车子data
+	                $.cookie('car_type', data.car_type, { path: '/', expires: dateTime }); //车子名称
+	                $.cookie('purchasePrice', data.purchasePrice, { path: '/', expires: dateTime }); //车子价格
+
+	                if (resp.code == 0) {
+	                    browserHistory.push('/program/' + _this.props.params.userId);
+	                } else {
+	                    $.id('load').style.display = 'none';
+	                    alert(resp.msg);
+	                }
+	            },
+	            error: function error() {}
+	        });
+	    },
+
+	    moveClick: function moveClick(event) {
+	        var moveCircle = React.findDOMNode(this.refs.moveCircle),
+	            move = function move() {},
+	            _this = this,
+	            change = React.findDOMNode(this.refs.change);
+	        move.prototype.left = function () {
+	            moveCircle.style.left = 1 + 'px';
+	            moveCircle.parentNode.style.backgroundColor = '#C4C4C5';
+	        };
+	        move.prototype.right = function () {
+	            moveCircle.style.left = 0.8 + 'rem';
+	            moveCircle.parentNode.style.backgroundColor = '#4CDB5D';
+	        };
+	        var say = new move();
+	        if (this.state.isCircle) {
+	            say.right();
+	            moveCircle.id = 1;
+	            _this.setState({
+	                isCircle: false
+	            });
+	            change.style.display = 'block';
+	        } else {
+	            moveCircle.id = 0;
+	            say.left();
+	            _this.setState({
+	                isCircle: true
+	            });
+	            change.style.display = 'none';
+	        }
+	    },
+	    startMoveClick: function startMoveClick(event) {
+	        var tar = event.currentTarget;
+	        tar.style.backgroundColor = '#5576d4';
+	    },
+	    render: function render() {
+	        var seat = '',
+	            idcard = '',
+	            userName = '',
+	            effect_time = '',
+	            log_time = '',
+	            edg_no = '',
+	            vin = '',
+	            car_id = '',
+	            car_type = '',
+	            purchasePrice = '';
+
+	        if ($.getCookie('userName') != null) {
+	            seat = parseFloat($.getCookie('seat')) + 1, idcard = $.getCookie('idcard'), userName = decodeURIComponent($.getCookie('userName'), 'utf-8'), effect_time = $.getCookie('effect_time'), log_time = $.getCookie('log_time'), edg_no = $.getCookie('edg_no'), vin = $.getCookie('vin'), car_id = $.getCookie('car_id'), car_type = decodeURIComponent($.getCookie('car_type'), 'utf-8'), purchasePrice = $.getCookie('purchasePrice');
+	        }
+	        return React.createElement('div', { className: 'tb-car' }, React.createElement(Back, { tit: '验证信息' }), React.createElement('ul', { className: 'tb-det' }, React.createElement('li', { className: 'clearfix' }, React.createElement('b', null, '姓名'), React.createElement('span', null, React.createElement('input', { className: 'value', ref: 'nameGet', type: 'text', placeholder: '请输入本人真实姓名', maxLength: '10', defaultValue: userName }))), React.createElement('li', { className: 'clearfix' }, React.createElement('b', null, '身份证号'), React.createElement('span', null, React.createElement('input', { className: 'value', ref: 'idcard', type: 'text', placeholder: '请输入本人身份证号', defaultValue: idcard })))), React.createElement('h4', { className: 'se-tit' }, '车辆信息'), React.createElement('ul', { className: 'tb-det' }, React.createElement('li', { className: 'clearfix' }, React.createElement('b', null, '车型'), React.createElement('span', { id: 'carMsg', ref: 'carMsg', className: seat, data: car_id, value: purchasePrice }, car_type), React.createElement('i', { className: 'iconfont pull-right' }, '')), React.createElement('li', { className: 'clearfix' }, React.createElement('b', null, '车架号'), React.createElement('span', { 'class': 'select-win', id: 'datesWrap1' }, React.createElement('input', { ref: 'carCode', className: 'value', type: 'text', placeholder: '请输入17位车架号', maxLength: '17', style: { textTransform: 'uppercase' }, defaultValue: vin }))), React.createElement('li', { className: 'clearfix' }, React.createElement('b', null, '发动机号'), React.createElement('span', null, React.createElement('input', { className: 'value', ref: 'engine', type: 'text', placeholder: '请输入发动机号', style: { textTransform: 'uppercase' }, defaultValue: edg_no }))), React.createElement('li', { className: 'clearfix' }, React.createElement('b', null, '注册日期'), React.createElement('span', null, React.createElement('input', { className: 'value', id: 'getDate', ref: 'date', type: 'text', defaultValue: log_time, readOnly: 'readonly', name: 'input_date', placeholder: '请输入日期', 'data-hl-calendar': '2000-01-01,2018-01-29' })), React.createElement('i', { className: 'iconfont pull-right' }, '')), React.createElement('li', { className: 'clearfix' }, React.createElement('b', null, '保单生效'), React.createElement('span', null, React.createElement('input', { className: 'value', id: 'getDate3', ref: 'date2', defaultValue: effect_time, type: 'text', readOnly: 'readonly', name: 'input_date', placeholder: '请输入日期', 'data-hl-calendar': '2000-01-01,2018-01-29' })), React.createElement('i', { className: 'iconfont pull-right' }, '')), React.createElement('li', { className: 'clearfix' }, React.createElement('b', null, '是否过户'), React.createElement('div', { className: 'button', style: { width: '1.7rem' }, onClick: this.moveClick }, React.createElement('span', { className: 'circle', id: '0', ref: 'moveCircle' }))), React.createElement('li', { className: 'getTime clearfix', ref: 'change', style: { display: 'none' } }, React.createElement('b', null, '过户日期'), React.createElement('span', null, React.createElement('input', { className: 'value', ref: 'changedate', id: 'transfer', type: 'text', readOnly: 'readonly', nly: '', name: 'input_date', placeholder: '请输入日期', 'data-hl-calendar': '2000-01-01,2018-01-29' })), React.createElement('i', { className: 'iconfont pull-right' }, ''))), React.createElement(Link, { className: 'abtn', onTouchStart: this.startMoveClick, onTouchEnd: this.checkMsgClick }, '下一步'), React.createElement(TbcarDe, null), React.createElement(Load, null));
+	    }
+	});
+	module.exports = Tbcar;
+
+	/* REACT HOT LOADER */ }).call(this); } finally { if (true) { (function () { var foundReactClasses = module.hot.data && module.hot.data.foundReactClasses || false; if (module.exports && module.makeHot) { var makeExportsHot = __webpack_require__(228); if (makeExportsHot(module, __webpack_require__(69))) { foundReactClasses = true; } var shouldAcceptModule = true && foundReactClasses; if (shouldAcceptModule) { module.hot.accept(function (err) { if (err) { console.error("Cannot not apply hot update to " + "tbcar.js" + ": " + err.message); } }); } } module.hot.dispose(function (data) { data.makeHot = module.makeHot; data.foundReactClasses = foundReactClasses; }); })(); } }
+	/* WEBPACK VAR INJECTION */}.call(exports, __webpack_require__(4)(module)))
+
+/***/ },
+/* 245 */
+/***/ function(module, exports, __webpack_require__) {
+
+	/* WEBPACK VAR INJECTION */(function(module) {/* REACT HOT LOADER */ if (true) { (function () { var ReactHotAPI = __webpack_require__(5), RootInstanceProvider = __webpack_require__(13), ReactMount = __webpack_require__(15), React = __webpack_require__(69); module.makeHot = module.hot.data ? module.hot.data.makeHot : ReactHotAPI(function () { return RootInstanceProvider.getRootInstances(ReactMount); }, React); })(); } try { (function () {
+
+	/**
+	 * Created by gongchuangshidai on 16/10/10.
+	 */
+	'use strict';
+
+	var React = __webpack_require__(69);
+
+	var _require = __webpack_require__(171);
+
+	var Router = _require.Router;
+	var Link = _require.Link;
+	var browserHistory = _require.browserHistory;
+
+	var reqwest = __webpack_require__(235);
+	var GoBack = __webpack_require__(243);
+	var url = __webpack_require__(237);
+	var allWay = __webpack_require__(238);
+
+	var cars = ['大众', '奔驰', '宝马', '凯迪拉克', '奥迪', '福特', '别克', '雪弗兰', '捷豹', '马自达'];
 	var TbcarDe = React.createClass({
 	    displayName: 'TbcarDe',
 
+	    getInitialState: function getInitialState() {
+	        return {
+	            iscarName: false,
+	            carName: null,
+	            carload: null,
+	            iscar: false
+	        };
+	    },
 	    componentDidMount: function componentDidMount() {
-	        var tbcarDe = document.getElementById('tbcarDe'),
-	            carWrap = document.getElementById('carWrap');
-	        var fh = tbcarDe.offsetHeight;
-	        var wh = window.screen.availHeight;
-	        carWrap.style.bottom = 0;
+	        var $ = new allWay();
 
+	        var tbcarDe = $.id('tbcarDe'),
+	            carWrap = $.id('carWrap'),
+	            tTop = $.id('tTop'),
+	            searchId = $.id('searchId');
+	        tTop.onclick = function () {
+	            tTop.style.display = 'none';
+	            carWrap.style.bottom = 100 + '%';
+	        };
+
+	        carWrap.style.bottom = 100 + '%';
+
+	        searchId.onsearch = function () {
+	            this.clickCarName();
+	        };
+	    },
+	    clickCarName: function clickCarName(event) {
+	        var car = React.findDOMNode(this.refs.search),
+	            _this = this,
+	            $ = new allWay();
+
+	        var opid = $.getCookie('opid'),
+	            token = $.getCookie('token'),
+	            base = btoa(opid + ':' + token);
+
+	        var modelName = car.value;
 	        reqwest({
-	            url: url + '/V1/insurance',
+	            url: url + 'V1/insurance',
 	            method: 'post',
 	            data: {
-	                modelName: '马自达',
-	                comCode: '33019102',
+	                modelName: modelName,
+	                comCode: $.getCookie('comcode'),
 	                _action: 'queryJyVehicleConfiguration'
 	            },
+	            headers: {
+	                'Authorization': 'Basic ' + base,
+	                'Accept': 'application/json, text/plain, */*'
+	            },
 	            success: function success(xrh) {
-	                console.log(typeof xrh);
-	                testJson = eval('(' + xrh + ')');
-	                console.log(testJson);
-	                console.log(typeof testJson);
+	                var carMsg = eval(xrh);
+	                if (_this.isMounted()) {
+	                    _this.setState({
+	                        carload: carMsg,
+	                        iscar: true
+	                    });
+	                }
 	            }
 	        });
 	    },
-	    render: function render() {
+	    searchCarClick: function searchCarClick(event) {
+	        var car = event.target,
+	            _this = this;
+	        var carChild = car.parentNode.children,
+	            $ = new allWay(),
+	            comcode = $.getCookie('comcode'),
+	            modelName = car.innerHTML;
+	        for (var i = 0, len = carChild.length; i < len; i++) {
+	            carChild[i].style.backgroundColor = '#fff';
+	        }
 
-	        return React.createElement('div', { className: 'carWrap', id: 'carWrap' }, React.createElement('div', { className: 'tbcarDe', id: 'tbcarDe' }, React.createElement('div', { className: 'serch' }, React.createElement('i', { className: 'iconfont' }, ''), React.createElement('form', { action: '' }, React.createElement('input', { type: 'search', placeholder: '请输入品牌车名称搜索' }))), React.createElement('h4', { className: 'se-tit' }, '热门品牌'), React.createElement('ul', { className: 'hot-li clearfix' }, cars.map(function (item) {
-	            return React.createElement('li', null, item);
-	        })), React.createElement('h4', { className: 'se-tit' }, '车型检索'), React.createElement('ul', { className: 'eve-li' }, React.createElement('li', null, '奥迪'), React.createElement('li', null, '奥卡路'), React.createElement('li', null, '奔驰'), React.createElement('li', null, '宝马'), React.createElement('li', null, '本田'), React.createElement('li', null, '标志'), React.createElement('li', null, '保时捷'), React.createElement('li', null, '巴博斯'), React.createElement('li', null, '北京'), React.createElement('li', null, '宝骏'), React.createElement('li', null, '奔腾'), React.createElement('li', null, '巴博斯'), React.createElement('li', null, '北京'), React.createElement('li', null, '宝骏'), React.createElement('li', null, '奔腾'), React.createElement('li', null, '巴博斯'), React.createElement('li', null, '北京'), React.createElement('li', null, '宝骏'), React.createElement('li', null, '奔腾'))));
+	        var opid = $.getCookie('opid'),
+	            token = $.getCookie('token'),
+	            base = btoa(opid + ':' + token);
+
+	        car.style.backgroundColor = '#eaeaea';
+
+	        reqwest({
+	            url: url + 'V1/insurance',
+	            method: 'post',
+	            data: {
+	                modelName: modelName,
+	                comCode: comcode,
+	                _action: 'queryJyVehicleConfiguration'
+	            },
+	            headers: {
+	                'Authorization': 'Basic ' + base,
+	                'Accept': 'application/json, text/plain, */*'
+	            },
+	            success: function success(xrh) {
+	                var carMsg = eval(xrh);
+
+	                if (_this.isMounted()) {
+	                    _this.setState({
+	                        carload: carMsg,
+	                        iscar: true
+	                    });
+	                }
+	            }
+	        });
+	    },
+	    getValue: function getValue(event) {
+	        var $ = new allWay();
+
+	        var liVal = event.currentTarget;
+	        var carMsg = $.id('carMsg'),
+	            carWrap = $.id('carWrap'),
+	            tTop = React.findDOMNode(this.refs.tTop);
+	        carMsg.innerHTML = liVal.id;
+	        tTop.style.display = 'none';
+	        carMsg.setAttribute('data', liVal.getAttribute('data'));
+	        carMsg.setAttribute('value', liVal.className);
+	        carMsg.className = liVal.getAttribute('value');
+	        carWrap.style.bottom = 100 + '%';
+	    },
+	    render: function render() {
+	        var _this = this;
+	        if (_this.state.iscar) {
+	            var carList = _this.state.carload.map(function (item) {
+	                return React.createElement('li', { onClick: this.getValue, ref: 'cars',
+	                    id: item.vehicleName,
+	                    data: item.vehicleCode,
+	                    value: item.seat,
+	                    className: item.purchasePrice
+	                }, item.vehicleName, item.carRemark, item.seat, '座', item.purchasePrice / 10000, '万元');
+	            }, _this);
+	        }
+
+	        return React.createElement('div', { className: 'carWrap', id: 'carWrap', ref: 'carWrap' }, React.createElement(GoBack, { tit: '投保车型', id: 'tTop', ref: 'tTop' }), React.createElement('div', { className: 'tbcarDe', id: 'tbcarDe', style: { paddingTop: '2rem' } }, React.createElement('div', { className: 'serch clearfix' }, React.createElement('i', { className: 'iconfont', onTouchEnd: this.clickCarName }, ''), React.createElement('input', { type: 'search', placeholder: '请输入品牌车名称搜索', id: 'searchId', ref: 'search', onTouchEnd: this.clickCarName })), React.createElement('h4', { className: 'se-tit' }, '热门品牌'), React.createElement('ul', { className: 'hot-li clearfix' }, cars.map(function (item) {
+	            return React.createElement('li', { onClick: this.searchCarClick }, item);
+	        }, this)), React.createElement('h4', { className: 'se-tit' }, '车型检索'), React.createElement('ul', { className: 'eve-li' }, carList)));
 	    }
 	});
 	module.exports = TbcarDe;
 
 	/* REACT HOT LOADER */ }).call(this); } finally { if (true) { (function () { var foundReactClasses = module.hot.data && module.hot.data.foundReactClasses || false; if (module.exports && module.makeHot) { var makeExportsHot = __webpack_require__(228); if (makeExportsHot(module, __webpack_require__(69))) { foundReactClasses = true; } var shouldAcceptModule = true && foundReactClasses; if (shouldAcceptModule) { module.hot.accept(function (err) { if (err) { console.error("Cannot not apply hot update to " + "tbcarDe.js" + ": " + err.message); } }); } } module.hot.dispose(function (data) { data.makeHot = module.makeHot; data.foundReactClasses = foundReactClasses; }); })(); } }
+	/* WEBPACK VAR INJECTION */}.call(exports, __webpack_require__(4)(module)))
+
+/***/ },
+/* 246 */
+/***/ function(module, exports, __webpack_require__) {
+
+	/* WEBPACK VAR INJECTION */(function(module) {/* REACT HOT LOADER */ if (true) { (function () { var ReactHotAPI = __webpack_require__(5), RootInstanceProvider = __webpack_require__(13), ReactMount = __webpack_require__(15), React = __webpack_require__(69); module.makeHot = module.hot.data ? module.hot.data.makeHot : ReactHotAPI(function () { return RootInstanceProvider.getRootInstances(ReactMount); }, React); })(); } try { (function () {
+
+	/**
+	 * Created by gongchuangshidai on 16/10/28.
+	 */
+	'use strict';
+
+	var React = __webpack_require__(69);
+
+	var _require = __webpack_require__(171);
+
+	var Route = _require.Route;
+	var Router = _require.Router;
+	var Link = _require.Link;
+	var browserHistory = _require.browserHistory;
+
+	var url = __webpack_require__(237);
+	var reqwest = __webpack_require__(235);
+	var allWay = __webpack_require__(238);
+	var Back = __webpack_require__(241);
+
+	var Load = __webpack_require__(239);
+
+	var Prolist = __webpack_require__(247);
+	var Monlist = __webpack_require__(248);
+
+	var $ = new allWay();
+
+	var Program = React.createClass({
+	    displayName: 'Program',
+
+	    getInitialState: function getInitialState() {
+	        return {
+	            isjson: false,
+	            json: null,
+	            isheight: false,
+	            mondata: [],
+	            ismondata: false,
+	            innrData: null,
+	            isdata: false,
+	            Apre: '',
+	            Bpre: '',
+	            D3pre: '',
+	            D4pre: '',
+	            G1pre: '',
+	            Fpre: '',
+	            Lpre: '',
+	            Zpre: '',
+	            Mpre: '',
+	            A4pre: '',
+	            BZ: '',
+	            TAX: ''
+
+	        };
+	    },
+	    componentDidMount: function componentDidMount() {
+	        var _this = this;
+	        var chanceId = $.getCookie('chanceId'),
+	            getDate1 = $.id('getDate1');
+
+	        getDate1.onclick = function () {
+	            editDate(event);
+	        };
+
+	        var opid = $.getCookie('opid'),
+	            token = $.getCookie('token'),
+	            base = btoa(opid + ':' + token);
+
+	        function c(id) {
+	            return document.getElementsByClassName(id);
+	        }
+
+	        var dataJson = {},
+	            amountB = [],
+	            amountD4 = [],
+	            modeCodeF = [],
+	            checkbox = [],
+	            amountL = [],
+	            amountD3 = [];
+
+	        reqwest({
+	            url: 'http://api.rongzhubao.cn/V1/insurance',
+	            method: 'post',
+	            data: {
+	                chanceId: chanceId,
+	                _action: 'calculationHtml'
+	            },
+	            headers: {
+	                'Authorization': 'Basic ' + base,
+	                'Accept': 'application/json, text/plain, */*'
+	            },
+	            success: function success(xrh) {
+	                $.id('getvalInthis').innerHTML = xrh;
+	                for (var i = 0, len = $.id('amount_B').children.length; i < len; i++) {
+	                    amountB.push($.id('amount_B').children[i].value);
+	                }
+	                for (var j = 0, leng = $.id('amount_D4').children.length; j < leng; j++) {
+	                    amountD4.push($.id('amount_D4').children[j].value);
+	                }
+	                for (var h = 0, lengs = $.id('modeCode_F').children.length; h < lengs; h++) {
+	                    modeCodeF.push($.id('modeCode_F').children[h].innerHTML);
+	                }
+	                for (var s = 0, le = c('checkbox').length; s < le; s++) {
+	                    checkbox.push({
+	                        tit: c('checkbox')[s].innerHTML.replace(/<.+?>/gim, ''),
+	                        value: c('checkbox')[s].getElementsByTagName('input')[0].value
+	                    });
+	                }
+	                for (var p = 0, leg = $.id('amount_L').length; p < leg; p++) {
+	                    amountL.push($.id('amount_L')[p].value);
+	                }
+	                for (var q = 0, leq = $.id('amount_D3').length; q < leg; q++) {
+	                    amountD3.push($.id('amount_D3')[q].value);
+	                }
+	                $.id('load').style.display = 'none';
+
+	                dataJson = {
+	                    tishi_A: $.id('tishi_A').innerHTML, //车辆损失险
+	                    amount_A: $.id('amount_A').value, //车辆损失险的预算价位30%浮动
+	                    tishi_B: $.id('tishi_B').innerHTML, //第三人责任保险
+	                    amount_B: amountB, //第三人责任险价位
+	                    tishi_G1: $.id('tishi_G1').innerHTML, //全车盗抢保险
+	                    amount_G1: $.id('amount_G1').value, //全车盗抢保险估算
+	                    tishi_D3: $.id('tishi_D3').innerHTML, //车上人员责任保险(司机)
+	                    amount_D3: amountD3, //车上人员责任险(司机)
+	                    tishi_D4: $.id('tishi_D4').innerHTML, //车上人员责任险(乘客)
+	                    amount_D4: amountD4, //车上人员责任险(乘客)金额
+	                    tishi_F: $.id('tishi_F').innerHTML, //单独玻璃险
+	                    modeCode_F: modeCodeF, //玻璃险的内容
+	                    tishi_Z: $.id('tishi_Z').innerHTML, //自燃损失险
+	                    amount_Z: $.id('amount_Z').value, //自然损失价位
+	                    tishi_L: $.id('tishi_L').innerHTML, //车身划痕损失险
+	                    amount_L: amountL, //车身划痕险损失险价格
+	                    tishi_M: $.id('tishi_M').innerHTML, //不计责任车辆损失险
+	                    tishi_A4: $.id('tishi_A4').innerHTML, //指定修理厂险
+	                    checkbox: checkbox //第三方不计责任车辆损失险
+	                };
+	                if (_this.isMounted()) {
+	                    _this.setState({
+	                        json: dataJson,
+	                        isjson: true
+	                    });
+	                }
+	            },
+	            error: function error() {}
+	        });
+	    },
+
+	    moreClick: function moreClick() {
+	        var insuranList = React.findDOMNode(this.refs.insuranList),
+	            icon = React.findDOMNode(this.refs.icon);
+	        var more = '<pre class="iconfont">&#xe63c;</pre>';
+	        var less = '<pre class="iconfont">&#xe634;</pre>';
+	        if (this.state.isheight) {
+	            insuranList.style.height = 6.1 + 'rem';
+	            icon.innerHTML = more;
+	        } else {
+	            insuranList.style.height = 27.6 + 'rem'; //总高度.可以计算.第二版更新
+	            icon.innerHTML = less;
+	        }
+	        this.setState({
+	            isheight: !this.state.isheight
+	        });
+	    },
+	    moreChoose: function moreChoose() {
+	        var prolist = document.getElementById('prolist');
+	        prolist.style.left = 0;
+	    },
+	    disBlock: function disBlock() {
+
+	        var monli = $.id('monlist'),
+	            moWr = $.id('moWr'),
+	            icon = document.getElementsByClassName('icon');
+	        for (var i = 0, len = icon.length; i < len; i++) {
+	            icon[i].innerHTML = '';
+	        }
+	        function move() {
+	            monli.style.opacity = 1;
+	            moWr.style.bottom = 0;
+	        }
+	        function nonePlay() {
+	            monlist.style.display = 'block';
+	        }
+	        setTimeout(move, 400);
+	        setTimeout(nonePlay, 200);
+	    },
+	    amountBCLick: function amountBCLick(event) {
+	        var inner = event.currentTarget.getElementsByClassName('inner');
+	        this.setState({
+	            mondata: this.state.json.amount_B,
+	            ismondata: true,
+	            innrData: inner
+	        });
+	        this.disBlock();
+	    },
+	    amountD3Click: function amountD3Click(event) {
+	        var inner = event.currentTarget.getElementsByClassName('inner');
+	        this.setState({
+	            mondata: this.state.json.amount_D3,
+	            ismondata: true,
+	            innrData: inner
+	        });
+	        this.disBlock();
+	    },
+	    amountD4Click: function amountD4Click(event) {
+	        var inner = event.currentTarget.getElementsByClassName('inner');
+	        this.setState({
+	            mondata: this.state.json.amount_D4,
+	            ismondata: true,
+	            innrData: inner
+	        });
+	        this.disBlock();
+	    },
+	    amountL1Click: function amountL1Click(event) {
+	        var inner = event.currentTarget.getElementsByClassName('inner');
+	        this.setState({
+	            mondata: this.state.json.amount_L,
+	            ismondata: true,
+	            innrData: inner
+	        });
+	        this.disBlock();
+	    },
+	    modeCodeClick: function modeCodeClick(event) {
+	        var inner = event.currentTarget.getElementsByClassName('inner');
+	        this.setState({
+	            mondata: this.state.json.modeCode_F,
+	            ismondata: true,
+	            innrData: inner
+	        });
+	        this.disBlock();
+	    },
+	    changeClick: function changeClick(event) {
+	        var tar = event.currentTarget,
+	            data = tar.parentNode.getAttribute('data');
+
+	        if (data == 0) {
+	            tar.style.color = '#5A7CDD';
+	            tar.parentNode.setAttribute('data', 1);
+	        } else {
+	            tar.style.color = '#e9e9e9';
+	            tar.parentNode.setAttribute('data', 0);
+	        }
+	    },
+	    moreCheckone: function moreCheckone(event) {
+	        var tar = event.currentTarget,
+	            kindflag = tar.parentNode.getAttribute('name'),
+	            data = tar.parentNode.getAttribute('data');
+
+	        if (kindflag == 1) {
+	            tar.parentNode.setAttribute('name', 0);
+	        } else {
+	            tar.parentNode.setAttribute('name', 1);
+	        }
+	        var chil = document.getElementsByClassName(tar.parentNode.id)[0];
+	        var icon = chil.getElementsByClassName('iconfont')[0];
+
+	        if (data == 0) {
+	            tar.style.color = '#5A7CDD';
+	            tar.parentNode.setAttribute('data', 1);
+	            icon.style.color = '#5A7CDD';
+	            chil.setAttribute('data', 1);
+	        } else {
+	            tar.style.color = '#e9e9e9';
+	            tar.parentNode.setAttribute('data', 0);
+	            icon.style.color = '#eaeaea';
+	            chil.setAttribute('data', 0);
+	        }
+	    },
+	    addLessClick: function addLessClick() {
+
+	        var checkIn = document.getElementsByClassName('eve-list'),
+	            charr = [],
+	            kindArray = [],
+	            _this = this;
+	        var chanceId = $.getCookie('chanceId');
+	        $.id('load').style.display = 'block';
+
+	        for (var i = 0, len = checkIn.length; i < len; i++) {
+	            if (checkIn[i].getAttribute('data') == '1') {
+	                charr.push(checkIn[i]);
+	            }
+	        }
+	        for (var j = 0, leng = charr.length; j < leng; j++) {
+	            if (charr[j].getAttribute('itemID') != '') {
+	                kindArray.push({
+	                    kindCode: charr[j].getAttribute('value'),
+	                    amount: 0, //钱1
+	                    unitAmount: 0, //钱2
+	                    serialNo: 1, //无用
+	                    quantity: parseFloat(charr[j].getAttribute('accept')), //accept 只有D4是7
+	                    deductibleRate: 0,
+	                    value: 0,
+	                    kindFlag: parseFloat(charr[j].getAttribute('name')), //只有B有1 name=kindflag
+	                    modeCode: charr[j].getAttribute('itemID') //玻璃才有
+	                });
+	            } else {
+	                kindArray.push({
+	                    kindCode: charr[j].id,
+	                    amount: parseFloat(charr[j].getElementsByClassName('amount')[0].innerHTML) * charr[j].getAttribute('accept'), //钱1
+	                    unitAmount: charr[j].getElementsByClassName('amount')[0].innerHTML, //钱2
+	                    serialNo: 1, //无用
+	                    quantity: parseFloat(charr[j].getAttribute('accept')), //accept 只有D4是7
+	                    deductibleRate: charr[j].getAttribute('accept'),
+	                    value: 0,
+	                    kindFlag: parseFloat(charr[j].getAttribute('name')), //只有B有1 name=kindflag
+	                    modeCode: charr[j].getAttribute('itemID') //玻璃才有
+	                });
+	            }
+	        }
+	        kindArray.push({
+	            kindCode: 'BZ',
+	            amount: 122000, //钱1
+	            unitAmount: 122000, //钱2
+	            serialNo: 1, //无用
+	            quantity: 1,
+	            deductibleRate: 0,
+	            kindFlag: 0, //只有B有1 name=kindflag
+	            value: 0,
+	            modeCode: ''
+	        }, {
+	            kindCode: 'M',
+	            amount: 0, //钱1
+	            unitAmount: 0, //钱2
+	            serialNo: 1, //无用
+	            quantity: 1,
+	            deductibleRate: 0,
+	            kindFlag: 0, //只有B有1 name=kindflag
+	            value: 0,
+	            modeCode: ''
+	        });
+
+	        var opid = $.getCookie('opid'),
+	            token = $.getCookie('token'),
+	            base = btoa(opid + ':' + token);
+
+	        reqwest({
+	            url: url + 'V1/insurance',
+	            method: 'post',
+	            data: {
+	                answer: '&',
+	                chanceId: chanceId,
+	                kindArray: kindArray,
+	                _action: 'insuranceCalculate'
+	            },
+	            headers: {
+	                'Authorization': 'Basic ' + base,
+	                'Accept': 'application/json, text/plain, */*'
+	            },
+	            success: function success(xrh) {
+	                $.id('load').style.display = 'none';
+	                var json = xrh;
+	                var jsondata = eval('[' + json + ']');
+
+	                console.log(jsondata);
+	                if (jsondata[0].ckinds == undefined) {
+	                    alert(xrh);
+	                    return;
+	                }
+	                _this.setState({
+	                    isdata: false,
+	                    Apre: '',
+	                    Bpre: '',
+	                    D3pre: '',
+	                    D4pre: '',
+	                    G1pre: '',
+	                    Fpre: '',
+	                    Lpre: '',
+	                    Zpre: '',
+	                    Mpre: '',
+	                    BZ: '',
+	                    TAX: ''
+	                });
+	                for (var i = 0, len = jsondata[0].ckinds.length; i < len; i++) {
+
+	                    if (jsondata[0].ckinds[i].kindCode == 'A') {
+	                        _this.setState({
+	                            isdata: true,
+	                            Apre: jsondata[0].ckinds[i].premium
+	                        });
+	                    }
+	                    if (jsondata[0].ckinds[i].kindCode == 'B') {
+	                        _this.setState({
+	                            isdata: true,
+	                            Bpre: jsondata[0].ckinds[i].premium
+	                        });
+	                    }
+	                    if (jsondata[0].ckinds[i].kindCode == 'D3') {
+	                        _this.setState({
+	                            isdata: true,
+	                            D3pre: jsondata[0].ckinds[i].premium
+	                        });
+	                    }
+	                    if (jsondata[0].ckinds[i].kindCode == 'L') {
+	                        _this.setState({
+	                            isdata: true,
+	                            Lpre: jsondata[0].ckinds[i].premium
+	                        });
+	                    }
+	                    if (jsondata[0].ckinds[i].kindCode == 'Z') {
+	                        _this.setState({
+	                            isdata: true,
+	                            Zpre: jsondata[0].ckinds[i].premium
+	                        });
+	                    }
+	                    if (jsondata[0].ckinds[i].kindCode == 'F') {
+	                        _this.setState({
+	                            isdata: true,
+	                            Fpre: jsondata[0].ckinds[i].premium
+	                        });
+	                    }
+	                    if (jsondata[0].ckinds[i].kindCode == 'G1') {
+	                        _this.setState({
+	                            isdata: true,
+	                            G1pre: jsondata[0].ckinds[i].premium
+	                        });
+	                    }
+	                    if (jsondata[0].ckinds[i].kindCode == 'D4') {
+	                        _this.setState({
+	                            isdata: true,
+	                            D4pre: jsondata[0].ckinds[i].premium
+	                        });
+	                    }
+	                    if (jsondata[0].ckinds[i].kindCode == 'M') {
+	                        _this.setState({
+	                            isdata: true,
+	                            Mpre: jsondata[0].ckinds[i].premium
+	                        });
+	                    }
+	                    if (jsondata[0].ckinds[i].kindCode == 'A4') {
+	                        _this.setState({
+	                            isdata: true,
+	                            A4pre: jsondata[0].ckinds[i].premium
+	                        });
+	                    }
+	                    if (jsondata[0].ckinds[i].kindCode == 'BZ') {
+	                        _this.setState({
+	                            isdata: true,
+	                            BZ: jsondata[0].ckinds[i].premium
+	                        });
+	                    }
+	                    _this.setState({
+	                        isdata: true,
+	                        TAX: jsondata[0].cpayTax
+	                    });
+	                }
+	            }
+	        });
+	    },
+	    getMsgClick: function getMsgClick(event) {
+
+	        var Bcal = $.id('Bcal'),
+	            checkIn = document.getElementsByClassName('eve-list'),
+	            arr = [],
+	            all_fee = parseFloat(Bcal.innerHTML),
+	            _this = this,
+	            tar = event.currentTarget;
+
+	        tar.style.backgroundColor = '#5A7CDD';
+
+	        var opid = $.getCookie('opid'),
+	            token = $.getCookie('token'),
+	            base = btoa(opid + ':' + token);
+
+	        if (all_fee == 0) {
+	            alert('请先计算保费');
+	            return;
+	        }
+	        $.id('load').style.display = 'block';
+
+	        var B = function B(id, value) {
+	            return id.getElementsByClassName(value)[0].innerHTML;
+	        };
+
+	        for (var i = 0, len = checkIn.length; i < len; i++) {
+	            if (checkIn[i].getAttribute('data') == 1) {
+	                arr.push({
+	                    name: B(checkIn[i], 'this_Name'),
+	                    limit: B(checkIn[i], 'amount'),
+	                    prMon: B(checkIn[i], 'pr-mon')
+	                });
+	                //总保费all_fee,id,arr
+	            }
+	        } //数据获取
+	        arr.push({
+	            name: '不计免赔特约',
+	            limit: '',
+	            prMon: $.id('three').innerHTML
+	        });
+	        arr.push({
+	            name: '交强险',
+	            limit: '122000',
+	            prMon: $.id('BZ').innerHTML
+	        });
+	        arr.push({
+	            name: '车船线',
+	            limit: '',
+	            prMon: $.id('TAX').innerHTML
+	        });
+	        reqwest({
+	            url: url + 'V1/order',
+	            method: 'post',
+	            data: {
+	                arr: arr,
+	                one_id: $.getCookie('chanceId'),
+	                all_fee: all_fee
+	            },
+	            headers: {
+	                'Authorization': 'Basic ' + base,
+	                'Accept': 'application/json, text/plain, */*'
+	            },
+	            success: function success(xrh) {
+	                if (xrh.code == 0) {
+	                    browserHistory.push('/imme/' + xrh.list);
+	                }
+	            }
+	        });
+	    },
+	    changecolor: function changecolor(event) {
+	        var tar = event.currentTarget;
+	        tar.style.backgroundColor = '#5576d4';
+	    },
+	    resetData: function resetData(event) {
+	        var date = React.findDOMNode(this.refs.date);
+
+	        var tar = event.currentTarget;
+	        var opid = $.getCookie('opid'),
+	            token = $.getCookie('token'),
+	            base = btoa(opid + ':' + token);
+
+	        reqwest({
+	            url: url + 'V1/insurance',
+	            method: 'post',
+	            data: {
+	                chanceId: $.getCookie('chanceId'),
+	                effectDate: date.value,
+	                _action: 'saveChanceInfo'
+	            },
+	            headers: {
+	                'Authorization': 'Basic ' + base,
+	                'Accept': 'application/json, text/plain, */*'
+	            },
+	            success: function success(xrh) {
+	                if (xrh.code == 0) {
+	                    $.cookie('chanceId', xrh.list);
+	                    alert('保单生效时间修改成功!');
+	                } else {
+	                    alert(xrh.msg);
+	                }
+	            }
+	        });
+	    },
+	    render: function render() {
+	        var _this = this,
+	            $ = new allWay(),
+	            all = 0,
+	            BZ = 0,
+	            alltop = 0,
+	            TAX = 0,
+	            seat = $.getCookie('seat'),
+	            effect_time = $.getCookie('effect_time');
+
+	        function N(num) {
+	            if (num == '') {
+	                return num = 0;
+	            }
+	            return parseFloat(num);
+	        };
+	        if (this.state.isdata == true) {
+
+	            var A = this.state.Apre,
+	                B = this.state.Bpre,
+	                D3 = this.state.D3pre,
+	                D4 = this.state.D4pre,
+	                G1 = this.state.G1pre,
+	                F = this.state.Fpre,
+	                Z = this.state.Zpre,
+	                L = this.state.Lpre,
+	                M = this.state.Mpre,
+	                A4 = this.state.A4pre;
+
+	            TAX = this.state.TAX;
+	            BZ = this.state.BZ;
+	            alltop = N(A) + N(B) + N(D3) + N(D4) + N(G1) + N(F) + N(Z) + N(Z) + N(L) + N(M) + N(A4);
+	            all = alltop + N(BZ) + N(TAX);
+	        }
+	        if (this.state.ismondata) {
+	            var monlist = React.createElement(Monlist, { ismon: this.state.ismondata, Mon: this.state.mondata, inner: this.state.innrData });
+	        }
+	        if (this.state.isjson) {
+	            var allData = _this.state.json,
+	                props = React.createElement(Prolist, { datajson: allData }),
+	                people_T = React.createElement('span', { className: 'pull-left' }, allData.tishi_M);
+	            var compont = React.createElement('div', null, React.createElement('li', { className: 'eve-list clearfix', data: '1', id: 'A', name: '1', accept: '1', itemID: '', action: '0' }, React.createElement('i', { className: 'iconfont pull-left grayChoose check', onClick: this.moreCheckone }, ''), React.createElement('div', { className: 'tit-name pull-left' }, React.createElement('p', { className: 'this_Name', id: 'this_A', data: 'A' }, '车辆损失险'), React.createElement('p', null, '保额', React.createElement('span', { className: 'amount' }, allData.amount_A), '元')), React.createElement('i', { className: 'iconfont pull-right' }), React.createElement('span', { className: 'pr-mon pull-right' }, A)), React.createElement('li', { className: 'eve-list clearfix', data: '1', id: 'B', name: '1', accept: '1', itemID: '', action: '0' }, React.createElement('i', { className: 'iconfont pull-left grayChoose check', onClick: this.moreCheckone }, ''), React.createElement('div', { className: 'wrap clearfix', onClick: this.amountBCLick }, React.createElement('div', { className: 'tit-name pull-left' }, React.createElement('p', { className: 'this_Name', data: 'B' }, '第三者责任险'), React.createElement('p', { className: 'inner' }, '保额', React.createElement('span', { className: 'amount' }, allData.amount_B[2]), '元')), React.createElement('i', { className: 'iconfont pull-right' }, ''), React.createElement('span', { className: 'pr-mon pull-right' }, B))), React.createElement('li', { className: 'eve-list clearfix', data: '0', id: 'D3', name: '0', accept: '1', itemID: '', action: '0' }, React.createElement('i', { className: 'iconfont pull-left grayChoose', onClick: this.changeClick }, ''), React.createElement('div', { className: 'wrap clearfix', onClick: this.amountD3Click }, React.createElement('div', { className: 'tit-name pull-left' }, React.createElement('p', { className: 'this_Name', data: 'D3' }, '车上人员险(司机)'), React.createElement('p', { className: 'inner' }, '保额', React.createElement('span', { className: 'amount' }, allData.amount_D3[2]), '元')), React.createElement('i', { className: 'iconfont pull-right' }, ''), React.createElement('span', { className: 'pr-mon pull-right' }, D3))), React.createElement('li', { className: 'eve-list clearfix', data: '0', id: 'D4', name: '0', accept: seat, itemID: '', action: '0' }, React.createElement('i', { className: 'iconfont pull-left grayChoose ', onClick: this.changeClick }, ''), React.createElement('div', { className: 'wrap clearfix', onClick: this.amountD4Click }, React.createElement('div', { className: 'tit-name pull-left' }, React.createElement('p', { className: 'this_Name', data: 'D4' }, '车上人员险(乘客)'), React.createElement('p', { className: 'inner' }, '保额', React.createElement('span', { className: 'amount' }, allData.amount_D4[1]), '元')), React.createElement('i', { className: 'iconfont pull-right' }, ''), React.createElement('span', { className: 'pr-mon pull-right' }, D4))), React.createElement('li', { className: 'eve-list clearfix', data: '0', value: 'F', id: 'F', name: '0', accept: '1', itemID: '1', action: '0' }, React.createElement('i', { className: 'iconfont pull-left grayChoose', onClick: this.changeClick }, ''), React.createElement('div', { className: 'tit-name pull-left', onClick: this.modeCodeClick }, React.createElement('p', { className: 'this_Name', data: 'F' }, '玻璃单独破碎险'), React.createElement('p', { data: '1', className: 'inner' }, React.createElement('span', { className: 'amount' }, allData.modeCode_F[0]), React.createElement('span', null))), React.createElement('span', { className: 'pr-mon pull-right' }, F)), React.createElement('li', { className: 'eve-list clearfix', data: '0', id: 'G1', name: '0', accept: '1', itemID: '', action: '0' }, React.createElement('i', { className: 'iconfont pull-left grayChoose', onClick: this.moreCheckone }, ''), React.createElement('div', { className: 'tit-name pull-left' }, React.createElement('p', { className: 'this_Name', data: 'G' }, '全车盗抢险'), React.createElement('p', { className: 'inner' }, '保额', React.createElement('span', { className: 'amount' }, allData.amount_G1), '元')), React.createElement('span', { className: 'pr-mon pull-right' }, G1)), React.createElement('li', { className: 'eve-list clearfix', data: '0', id: 'L', name: '0', accept: '1', itemID: '', action: '0' }, React.createElement('i', { className: 'iconfont pull-left grayChoose', onClick: this.moreCheckone }, ''), React.createElement('div', { className: 'wrap clearfix', onClick: this.amountL1Click }, React.createElement('div', { className: 'tit-name pull-left' }, React.createElement('p', { className: 'this_Name', data: 'L' }, '车身划痕险'), React.createElement('p', { className: 'inner' }, '保额', React.createElement('span', { className: 'amount' }, allData.amount_L[1]), '元')), React.createElement('i', { className: 'iconfont pull-right' }, ''), React.createElement('span', { className: 'pr-mon pull-right' }, L))), React.createElement('li', { className: 'eve-list clearfix', data: '0', id: 'Z', name: '0', accept: '1', itemID: '', action: '0' }, React.createElement('i', { className: 'iconfont pull-left grayChoose', onClick: this.moreCheckone }, ''), React.createElement('div', { className: 'tit-name pull-left' }, React.createElement('p', { className: 'this_Name', data: 'Z' }, '自燃损失险'), React.createElement('p', null, '保额', React.createElement('span', { className: 'amount' }, allData.amount_Z), '元')), React.createElement('span', { className: 'pr-mon pull-right' }, Z)), React.createElement('li', { className: 'eve-list clearfix', data: '0', id: 'A4', name: '0', accept: '1', itemID: '', action: '20' }, React.createElement('i', { className: 'iconfont pull-left grayChoose', onClick: this.changeClick }, ''), React.createElement('div', { className: 'tit-name pull-left' }, React.createElement('p', { className: 'this_Name', data: 'Z', style: { lineHeight: '1.8rem' } }, '指定修理厂险'), React.createElement('p', { style: { display: 'none' } }, React.createElement('span', { className: 'amount' }, '0'))), React.createElement('span', { className: 'pr-mon pull-right' }, A4)));
+	        }
+	        return React.createElement('div', { className: 'program', id: 'program' }, React.createElement('div', { className: 'getvalInthis', id: 'getvalInthis', style: { overflow: 'hidden', width: 0, height: 0 } }), React.createElement(Back, { tit: '投保方案', url: '/car/' + this.props.params.userId }), React.createElement('div', { className: 'dateTime clearfix' }, React.createElement('h4', { className: 'pull-left' }, '商业险'), React.createElement('div', { className: 'pull-right' }, React.createElement('span', null, '保单生效:'), React.createElement('span', null, React.createElement('input', { className: 'value', id: 'getDate1', ref: 'date',
+	            type: 'text', readOnly: 'readonly', name: 'input_date',
+	            defaultValue: effect_time, 'data-hl-calendar': '2000-01-01,2018-01-29' })), React.createElement('span', { onTouchEnd: this.resetData }, '更改'))), React.createElement('ul', { className: 'insuranceList anim', ref: 'insuranList' }, compont), React.createElement('div', { className: 'moreChoose', onClick: this.moreClick }, React.createElement('i', { id: 'icon', ref: 'icon' }, React.createElement('pre', { className: 'iconfont' }, '')), React.createElement('span', null, '收起更多保险保障')), React.createElement('ul', null, React.createElement('li', { className: 'pro-li clearfix', onClick: this.moreChoose }, people_T, React.createElement('i', { className: 'iconfont pull-right' }, ''), React.createElement('span', { id: 'three', className: 'pull-right' }, M)), React.createElement('li', { className: 'clearfix pro-li' }, React.createElement('span', { className: 'pull-left' }, '商业险合计:'), React.createElement('b', { className: 'pull-right' }, alltop.toFixed(2)))), React.createElement('div', { className: 'dateTime clearfix' }, React.createElement('h4', { className: 'pull-left' }, '交强险')), React.createElement('ul', null, React.createElement('li', { className: 'pro-li clearfix' }, React.createElement('span', { className: 'pull-left' }, '交强险'), React.createElement('b', { className: 'pull-right', id: 'BZ' }, BZ)), React.createElement('li', { className: 'pro-li clearfix' }, React.createElement('span', { className: 'pull-left' }, '车船险'), React.createElement('b', { className: 'pull-right', id: 'TAX' }, TAX))), React.createElement('div', { className: 'calMon clearfix' }, React.createElement('button', { className: 'pull-left', onClick: this.addLessClick }, '保费计算'), React.createElement('div', { className: 'pull-right' }, React.createElement('span', null, '总计'), React.createElement('b', { id: 'Bcal', className: 'or', style: { color: '#FF9600;' } }, all.toFixed(2)), React.createElement('span', null, '元'))), React.createElement(Link, { className: 'abtn', onTouchStart: this.changecolor, onTouchEnd: this.getMsgClick }, '确认投保'), props, monlist, React.createElement(Load, null));
+	    }
+	});
+	module.exports = Program;
+
+	/* REACT HOT LOADER */ }).call(this); } finally { if (true) { (function () { var foundReactClasses = module.hot.data && module.hot.data.foundReactClasses || false; if (module.exports && module.makeHot) { var makeExportsHot = __webpack_require__(228); if (makeExportsHot(module, __webpack_require__(69))) { foundReactClasses = true; } var shouldAcceptModule = true && foundReactClasses; if (shouldAcceptModule) { module.hot.accept(function (err) { if (err) { console.error("Cannot not apply hot update to " + "program.js" + ": " + err.message); } }); } } module.hot.dispose(function (data) { data.makeHot = module.makeHot; data.foundReactClasses = foundReactClasses; }); })(); } }
+	/* WEBPACK VAR INJECTION */}.call(exports, __webpack_require__(4)(module)))
+
+/***/ },
+/* 247 */
+/***/ function(module, exports, __webpack_require__) {
+
+	/* WEBPACK VAR INJECTION */(function(module) {/* REACT HOT LOADER */ if (true) { (function () { var ReactHotAPI = __webpack_require__(5), RootInstanceProvider = __webpack_require__(13), ReactMount = __webpack_require__(15), React = __webpack_require__(69); module.makeHot = module.hot.data ? module.hot.data.makeHot : ReactHotAPI(function () { return RootInstanceProvider.getRootInstances(ReactMount); }, React); })(); } try { (function () {
+
+	/**
+	 * Created by gongchuangshidai on 16/10/29.
+	 */
+	'use strict';
+
+	var React = __webpack_require__(69);
+	var allWay = __webpack_require__(238);
+
+	var _require = __webpack_require__(171);
+
+	var Router = _require.Router;
+	var Route = _require.Route;
+	var Link = _require.Link;
+	var browserHistory = _require.browserHistory;
+
+	var $ = new allWay();
+
+	var Prolist = React.createClass({
+	    displayName: 'Prolist',
+
+	    getInitialState: function getInitialState() {
+	        return {
+	            ischecked: false,
+	            arr: []
+	        };
+	    },
+	    componentDidMount: function componentDidMount() {
+	        var tTop = document.getElementById('tTop'),
+	            prolist = document.getElementById('prolist');
+
+	        var A = document.getElementsByClassName('A')[0];
+	        var B = document.getElementsByClassName('B')[0];
+
+	        A.children[1].style.color = '#5A7CDD';
+	        A.setAttribute('data', 1);
+	        A.setAttribute('name', 1);
+	        B.children[1].style.color = '#5A7CDD';
+	        B.setAttribute('data', 1);
+	        B.setAttribute('name', 1);
+	    },
+	    clickCheck: function clickCheck(event) {
+	        var target = event.currentTarget;
+	        var check = target.children[1],
+	            id = target.className;
+
+	        if (target.getAttribute('data') == '0') {
+	            check.style.color = '#5A7CDD';
+	            target.setAttribute('data', 1);
+	        } else {
+	            check.style.color = '#eaeaea';
+	            target.setAttribute('data', 0);
+	        }
+	    },
+	    clickChecked: function clickChecked() {
+	        var sej = [],
+	            spj = [];
+	        var eve = document.getElementsByClassName('eve-li')[0];
+
+	        for (var i = 0, len = eve.children.length; i < len; i++) {
+	            if (eve.children[i].getAttribute('data') == 1) {
+	                if (eve.children[i].className != 'X1') {
+	                    if (eve.children[i].className == 'D3_D4') {
+	                        sej.push('D3', 'D4');
+	                    } else {
+	                        sej.push(eve.children[i].className);
+	                    }
+	                }
+	            }
+	            if (eve.children[i].getAttribute('data') == 0) {
+	                if (eve.children[i].className != 'X1') {
+	                    if (eve.children[i].className == 'D3_D4') {
+	                        spj.push('D3', 'D4');
+	                    } else {
+	                        spj.push(eve.children[i].className);
+	                    }
+	                }
+	            }
+	        }
+	        for (var j = 0, l = sej.length; j < l; j++) {
+	            $.id(sej[j]).setAttribute('name', 1);
+	        }
+	        for (var p = 0, leng = spj.length; p < leng; p++) {
+	            $.id(spj[p]).setAttribute('name', 0);
+	        }
+
+	        var prolist = document.getElementById('prolist');
+	        prolist.style.left = -100 + '%';
+	    },
+	    moveColor: function moveColor(event) {
+	        var tar = event.currentTarget;
+	        tar.style.backgroundColor = '#5576d4';
+	    },
+	    leaveColor: function leaveColor(event) {
+	        this.clickChecked();
+	        var tar = event.currentTarget;
+	        tar.style.backgroundColor = '#5A7CDD';
+	    },
+	    render: function render() {
+	        var list = this.props.datajson.checkbox.map(function (item) {
+	            return React.createElement('li', { onClick: this.clickCheck, data: '0', className: item.value }, React.createElement('span', { className: 'pull-left' }, item.tit), React.createElement('i', { className: 'iconfont pull-right' }, ''));
+	        }, this);
+	        return React.createElement('div', { className: 'prolist', id: 'prolist', ref: 'prolist' }, React.createElement(Link, { className: 'goback', id: 'tTop',
+	            onTouchStart: this.moveColor,
+	            onTouchEnd: this.leaveColor
+	        }, React.createElement('i', { className: 'iconfont pull-left' }, ''), '投保方案'), React.createElement('ul', { className: 'eve-li' }, list), React.createElement(Link, { className: 'abtn zIn', onClick: this.clickChecked }, '确定'));
+	    }
+	});
+	module.exports = Prolist;
+
+	/* REACT HOT LOADER */ }).call(this); } finally { if (true) { (function () { var foundReactClasses = module.hot.data && module.hot.data.foundReactClasses || false; if (module.exports && module.makeHot) { var makeExportsHot = __webpack_require__(228); if (makeExportsHot(module, __webpack_require__(69))) { foundReactClasses = true; } var shouldAcceptModule = true && foundReactClasses; if (shouldAcceptModule) { module.hot.accept(function (err) { if (err) { console.error("Cannot not apply hot update to " + "programchild.js" + ": " + err.message); } }); } } module.hot.dispose(function (data) { data.makeHot = module.makeHot; data.foundReactClasses = foundReactClasses; }); })(); } }
+	/* WEBPACK VAR INJECTION */}.call(exports, __webpack_require__(4)(module)))
+
+/***/ },
+/* 248 */
+/***/ function(module, exports, __webpack_require__) {
+
+	/* WEBPACK VAR INJECTION */(function(module) {/* REACT HOT LOADER */ if (true) { (function () { var ReactHotAPI = __webpack_require__(5), RootInstanceProvider = __webpack_require__(13), ReactMount = __webpack_require__(15), React = __webpack_require__(69); module.makeHot = module.hot.data ? module.hot.data.makeHot : ReactHotAPI(function () { return RootInstanceProvider.getRootInstances(ReactMount); }, React); })(); } try { (function () {
+
+	/**
+	 * Created by gongchuangshidai on 16/10/29.
+	 */
+	'use strict';
+
+	var React = __webpack_require__(69);
+
+	var data = [{
+	    name: ''
+	}];
+
+	var Monlist = React.createClass({
+	    displayName: 'Monlist',
+
+	    clickMove: function clickMove(event) {
+
+	        var tar = event.currentTarget,
+	            check = '<pre class="iconfont">&#xe600;</pre>';
+	        if (this.props.ismon) {
+	            var html = tar.children[0].innerHTML.replace(/<.+?>/gim, '');
+	            if (html < 1000) {
+	                html = html * 10000;
+	            }
+	            var inn = this.props.inner[0];
+	            var htmlinn = inn.getElementsByClassName('amount')[0];
+
+	            htmlinn.innerHTML = html;
+	            if (htmlinn.innerHTML == '国产玻璃') {
+	                inn.parentNode.parentNode.setAttribute('itemID', 1);
+	            } else if (htmlinn.innerHTML == '进口玻璃') {
+	                inn.parentNode.parentNode.setAttribute('itemID', 2);
+	            }
+	        }
+	        tar.children[1].innerHTML = check;
+	        this.closeClick();
+	    },
+	    closeClick: function closeClick() {
+	        var monlist = React.findDOMNode(this.refs.monlist),
+	            moWr = React.findDOMNode(this.refs.moWr);
+	        function move() {
+	            monlist.style.opacity = 0;
+	            moWr.style.bottom = -100 + '%';
+	        }
+	        function nonePlay() {
+	            monlist.style.display = 'none';
+	        }
+	        setTimeout(move, 200);
+	        setTimeout(nonePlay, 500);
+	    },
+	    render: function render() {
+	        if (this.props.ismon) {
+	            var mon, block;
+	            var resp = this.props.Mon.map(function (item) {
+	                if (item > 49999) {
+	                    mon = item / 10000;
+	                    block = 'block';
+	                } else {
+	                    mon = item;
+	                    block = 'none';
+	                }
+	                return React.createElement('li', { onClick: this.clickMove }, React.createElement('span', { className: 'pull-left' }, mon), React.createElement('i', { className: 'pull-right icon' }), React.createElement('span', { className: 'pull-right', style: { display: block } }, '万元'));
+	            }, this);
+	        }
+	        return React.createElement('div', { className: 'monlist', id: 'monlist', ref: 'monlist', style: { display: 'none', opacity: 1 } }, React.createElement('div', { className: 'mo-bt', id: 'moBt', ref: 'moBt' }, React.createElement('div', { className: 'mo-wr', id: 'moWr', ref: 'moWr' }, React.createElement('div', { className: 'fixedWrap' }, React.createElement('ul', { className: 'eve-li' }, resp), React.createElement('div', { className: 'noChoose', onClick: this.closeClick }, '不投保')))));
+	    }
+	});
+	module.exports = Monlist;
+
+	/* REACT HOT LOADER */ }).call(this); } finally { if (true) { (function () { var foundReactClasses = module.hot.data && module.hot.data.foundReactClasses || false; if (module.exports && module.makeHot) { var makeExportsHot = __webpack_require__(228); if (makeExportsHot(module, __webpack_require__(69))) { foundReactClasses = true; } var shouldAcceptModule = true && foundReactClasses; if (shouldAcceptModule) { module.hot.accept(function (err) { if (err) { console.error("Cannot not apply hot update to " + "monlist.js" + ": " + err.message); } }); } } module.hot.dispose(function (data) { data.makeHot = module.makeHot; data.foundReactClasses = foundReactClasses; }); })(); } }
+	/* WEBPACK VAR INJECTION */}.call(exports, __webpack_require__(4)(module)))
+
+/***/ },
+/* 249 */
+/***/ function(module, exports, __webpack_require__) {
+
+	/* WEBPACK VAR INJECTION */(function(module) {/* REACT HOT LOADER */ if (true) { (function () { var ReactHotAPI = __webpack_require__(5), RootInstanceProvider = __webpack_require__(13), ReactMount = __webpack_require__(15), React = __webpack_require__(69); module.makeHot = module.hot.data ? module.hot.data.makeHot : ReactHotAPI(function () { return RootInstanceProvider.getRootInstances(ReactMount); }, React); })(); } try { (function () {
+
+	/**
+	 * Created by gongchuangshidai on 16/10/31.
+	 */
+	'use strict';
+
+	var React = __webpack_require__(69);
+	var RulesToop = __webpack_require__(250);
+
+	var _require = __webpack_require__(171);
+
+	var Router = _require.Router;
+	var Route = _require.Route;
+	var Link = _require.Link;
+	var browserHistory = _require.browserHistory;
+
+	var Back = __webpack_require__(241);
+	var allWay = __webpack_require__(238);
+	var reqwest = __webpack_require__(235);
+	var url = __webpack_require__(237);
+	var Load = __webpack_require__(239);
+
+	var $ = new allWay();
+	var Imme = React.createClass({
+	    displayName: 'Imme',
+
+	    getInitialState: function getInitialState() {
+	        return {
+	            rule: null,
+	            isrule: false
+	        };
+	    },
+	    componentDidMount: function componentDidMount() {
+
+	        $.id('load').style.display = 'none';
+
+	        var area2 = new LArea();
+	        area2.init({
+	            'trigger': 'address',
+	            'valueTo': 'value2',
+	            'keys': {
+	                id: 'value',
+	                name: 'text'
+	            },
+	            'type': 2,
+	            'data': [provs_data, citys_data, dists_data]
+	        });
+
+	        $.id('close').onclick = function () {
+	            $.id('checked').checked = 'checked';
+	        };
+	    },
+	    copyClick: function copyClick(event) {
+	        var tar = event.currentTarget,
+	            val = React.findDOMNode(this.refs.carName).innerHTML;
+	        tar.parentNode.getElementsByTagName('input')[0].value = val;
+	    },
+	    rulesBlock: function rulesBlock(event) {
+	        var tar = event.currentTarget;
+	        console.log(tar.id);
+	        this.setState({
+	            rule: tar.id,
+	            isrule: true
+	        });
+	        var wp = $.id('toopwp');
+	        wp.style.display = 'block';
+	    },
+	    moveColor: function moveColor(event) {
+	        var tar = event.currentTarget;
+	        tar.style.backgroundColor = '#5576d4';
+	    },
+	    leaveColor: function leaveColor(event) {
+	        var $ = new allWay(),
+	            _this = this;
+	        var tar = event.currentTarget;
+	        tar.style.backgroundColor = '#5A7CDD';
+
+	        if ($.id('checked').checked == false) {
+	            alert('请阅读并同意条款信息');
+	            return;
+	        }
+	        var opid = $.getCookie('opid'),
+	            token = $.getCookie('token'),
+	            base = btoa(opid + ':' + token);
+
+	        var address = {
+	            idcard: $.getCookie('idcard'), //身份证
+	            applicant: $.id('applicant').value, //投保人
+	            policy: $.id('policy').value, //被保人
+	            receiver: $.id('receiver').value, //收件人
+	            rePhone: $.id('rePhone').value, //收件人手机号
+	            address: $.id('address').value, //收件地址
+	            addDe: $.id('addDe').value, //收件详细地址
+	            list: this.props.params.userId //订单号
+	        };
+	        if (address.receiver == '') {
+	            alert('请输入收件人姓名');
+	            return;
+	        }
+	        if (!$.isPhone(address.rePhone)) {
+	            alert('请输入正确的收件人手机号');
+	        }
+	        if (address.policy == '') {
+	            alert('请输入被保人姓名');
+	            return;
+	        }
+	        if (address.applicant == '') {
+	            alert('请输入投保人姓名');
+	            return;
+	        }
+	        if (address.address == '') {
+	            alert('请输入地区');
+	            return;
+	        }
+	        if (address.addDe == '') {
+	            alert('请输入详细地址!');
+	            return;
+	        }
+	        $.id('load').style.display = 'block';
+	        reqwest({
+	            url: url + 'V1/address',
+	            method: 'post',
+	            data: address,
+	            headers: {
+	                'Authorization': 'Basic ' + base,
+	                'Accept': 'application/json, text/plain, */*'
+	            },
+	            success: function success(xrh) {
+	                if (xrh.code == 0) {
+	                    browserHistory.push('/chmsg/' + _this.props.params.userId);
+	                } else {
+	                    alert(xrh.msg);
+	                }
+	            },
+	            error: function error() {}
+	        });
+	    },
+	    render: function render() {
+	        var $ = new allWay(),
+	            data = {};
+
+	        data.name = $.getCookie('userName');
+	        data.phone = $.getCookie('userPhone');
+	        data.idcard = $.getCookie('idcard');
+	        var userName = decodeURIComponent(data.name, 'utf-8');
+
+	        return React.createElement('div', { className: 'immediately' }, React.createElement(Back, { url: '/program/' + this.props.params.userId, tit: '立即报价' }), React.createElement('h4', { className: 'se-tit' }, '车主信息'), React.createElement('ul', { className: 'eve-li clearfix' }, React.createElement('li', null, React.createElement('span', { className: 'leftspan pull-left' }, '姓名'), React.createElement('p', { className: 'pull-left', id: 'userName', ref: 'carName' }, userName)), React.createElement('li', null, React.createElement('span', { className: 'leftspan pull-left' }, '身份证号'), React.createElement('p', { className: 'pull-left', id: 'idcard' }, data.idcard)), React.createElement('li', null, React.createElement('span', { className: 'leftspan pull-left' }, '手机号'), React.createElement('p', { id: 'userPhone' }, data.phone)), React.createElement('li', null, React.createElement('span', { className: 'leftspan pull-left' }, '被投保人'), React.createElement('span', { className: 'pull-left' }, React.createElement('input', { type: 'text', id: 'policy', className: 'pull-left', defaultValue: '', placeholder: '输入被投保人姓名' })), React.createElement('p', { className: 'pull-right button', onClick: this.copyClick }, '同车主')), React.createElement('li', null, React.createElement('span', { className: 'leftspan pull-left' }, '投保人'), React.createElement('span', { className: 'pull-left' }, React.createElement('input', { type: 'text', id: 'applicant', className: 'pull-left', placeholder: '请输入投保人姓名' })), React.createElement('p', { className: 'pull-right button', onClick: this.copyClick }, '同车主'))), React.createElement('h4', { className: 'se-tit' }, '配送地址'), React.createElement('ul', { className: 'eve-li' }, React.createElement('li', { className: 'clearfix' }, React.createElement('span', { className: 'leftspan pull-left' }, '收件人'), React.createElement('span', { className: 'pull-left' }, React.createElement('input', { type: 'text', id: 'receiver', className: 'pull-left', defaultValue: userName })), React.createElement('p', { className: 'pull-right button', onClick: this.copyClick }, '同车主')), React.createElement('li', { className: 'clearfix' }, React.createElement('span', { className: 'leftspan pull-left' }, '手机号'), React.createElement('input', { defaultValue: data.phone, id: 'rePhone', className: 'phoneValue pull-left', type: 'tel', maxLength: '11' })), React.createElement('li', { className: 'clearfix' }, React.createElement('span', { className: 'leftspan pull-left' }, '地区选择'), React.createElement('span', { className: 'content-block pull-left' }, React.createElement('input', { id: 'address', type: 'text', className: 'pull-left', readOnly: '', placeholder: '城市选择特效' }), React.createElement('input', { id: 'value2', type: 'hidden', value: '110000,110100,110101' }))), React.createElement('li', { className: 'clearfix' }, React.createElement('span', { className: 'leftspan pull-left' }, '地区选择'), React.createElement('span', { className: 'content-block' }, React.createElement('input', { type: 'text', id: 'addDe', className: 'inputCom pull-left', placeholder: 'xx街道xx单元xx室' })))), React.createElement('p', { className: 'rules clearfix' }, React.createElement('input', { type: 'checkbox', id: 'checked' }), React.createElement('span', null, '立即报价即表示同意条款信息', React.createElement('span', { className: '', id: 'http://h5.rongzhubao.cn/rules3.html', onClick: this.rulesBlock }, '《商业险》'), React.createElement('span', { className: '', id: 'http://h5.rongzhubao.cn/rules4.html', onClick: this.rulesBlock }, '《交强险》'), React.createElement('span', { className: '', id: 'http://h5.rongzhubao.cn/rules5.html', onClick: this.rulesBlock }, '《免责申明》'))), React.createElement(Link, { onTouchStart: this.moveColor, onTouchEnd: this.leaveColor, className: 'abtn' }, '确认订单'), React.createElement(RulesToop, { src: this.state.rule, right: this.state.isrule }), React.createElement(Load, null));
+	    }
+	});
+	module.exports = Imme;
+
+	/* REACT HOT LOADER */ }).call(this); } finally { if (true) { (function () { var foundReactClasses = module.hot.data && module.hot.data.foundReactClasses || false; if (module.exports && module.makeHot) { var makeExportsHot = __webpack_require__(228); if (makeExportsHot(module, __webpack_require__(69))) { foundReactClasses = true; } var shouldAcceptModule = true && foundReactClasses; if (shouldAcceptModule) { module.hot.accept(function (err) { if (err) { console.error("Cannot not apply hot update to " + "immediately.js" + ": " + err.message); } }); } } module.hot.dispose(function (data) { data.makeHot = module.makeHot; data.foundReactClasses = foundReactClasses; }); })(); } }
+	/* WEBPACK VAR INJECTION */}.call(exports, __webpack_require__(4)(module)))
+
+/***/ },
+/* 250 */
+/***/ function(module, exports, __webpack_require__) {
+
+	/* WEBPACK VAR INJECTION */(function(module) {/* REACT HOT LOADER */ if (true) { (function () { var ReactHotAPI = __webpack_require__(5), RootInstanceProvider = __webpack_require__(13), ReactMount = __webpack_require__(15), React = __webpack_require__(69); module.makeHot = module.hot.data ? module.hot.data.makeHot : ReactHotAPI(function () { return RootInstanceProvider.getRootInstances(ReactMount); }, React); })(); } try { (function () {
+
+	/**
+	 * Created by gongchuangshidai on 16/11/3.
+	 */
+	'use strict';
+
+	var React = __webpack_require__(69);
+
+	var RulesToop = React.createClass({
+	    displayName: 'RulesToop',
+
+	    closeClick: function closeClick(event) {
+	        var tar = event.currentTarget;
+	        tar.style.backgroundColor = '#fff';
+	        var wp = React.findDOMNode(this.refs.toopwarp);
+	        wp.style.display = 'none';
+	    },
+	    startClick: function startClick(event) {
+	        var tar = event.currentTarget;
+	        tar.style.backgroundColor = '#f5f5f5';
+	    },
+	    render: function render() {
+	        if (this.props.right) {
+	            var src = this.props.src;
+	            console.log(src);
+	            var ifram = React.createElement('iframe', { src: src, frameborder: '0', width: '100%', height: '100%', border: '0' });
+	        }
+	        return React.createElement('div', { className: 'fixed ru-tp', ref: 'toopwarp', id: 'toopwp', style: { display: 'none' } }, React.createElement('div', { className: 'bgbox' }, React.createElement('h4', null, '《条款信息》'), React.createElement('div', { className: 'comstyle' }, React.createElement('ul', { style: { height: '100%' } }, React.createElement('li', { className: 'iframerool', style: { height: '100%' } }, ifram))), React.createElement('p', { id: 'close', onTouchStart: this.startClick, onTouchEnd: this.closeClick }, '确定')));
+	    }
+	});
+	module.exports = RulesToop;
+
+	/* REACT HOT LOADER */ }).call(this); } finally { if (true) { (function () { var foundReactClasses = module.hot.data && module.hot.data.foundReactClasses || false; if (module.exports && module.makeHot) { var makeExportsHot = __webpack_require__(228); if (makeExportsHot(module, __webpack_require__(69))) { foundReactClasses = true; } var shouldAcceptModule = true && foundReactClasses; if (shouldAcceptModule) { module.hot.accept(function (err) { if (err) { console.error("Cannot not apply hot update to " + "imRule.js" + ": " + err.message); } }); } } module.hot.dispose(function (data) { data.makeHot = module.makeHot; data.foundReactClasses = foundReactClasses; }); })(); } }
+	/* WEBPACK VAR INJECTION */}.call(exports, __webpack_require__(4)(module)))
+
+/***/ },
+/* 251 */
+/***/ function(module, exports, __webpack_require__) {
+
+	/* WEBPACK VAR INJECTION */(function(module) {/* REACT HOT LOADER */ if (true) { (function () { var ReactHotAPI = __webpack_require__(5), RootInstanceProvider = __webpack_require__(13), ReactMount = __webpack_require__(15), React = __webpack_require__(69); module.makeHot = module.hot.data ? module.hot.data.makeHot : ReactHotAPI(function () { return RootInstanceProvider.getRootInstances(ReactMount); }, React); })(); } try { (function () {
+
+	/**
+	 * Created by gongchuangshidai on 16/11/2.
+	 */
+	'use strict';
+
+	var React = __webpack_require__(69);
+	var Back = __webpack_require__(241);
+
+	var _require = __webpack_require__(171);
+
+	var Router = _require.Router;
+	var Route = _require.Route;
+	var Link = _require.Link;
+	var browserHistory = _require.browserHistory;
+
+	var allWay = __webpack_require__(238);
+	var reqwest = __webpack_require__(235);
+	var url = __webpack_require__(237);
+	var Load = __webpack_require__(239);
+
+	var $ = new allWay();
+
+	var times = [3, 6, 9];
+
+	var Order = React.createClass({
+	    displayName: 'Order',
+
+	    getInitialState: function getInitialState() {
+	        return {
+	            islist: false,
+	            list: null,
+	            allfee: null,
+	            times: 6,
+	            istimes: false,
+	            rule: null,
+	            isrule: false
+	        };
+	    },
+	    componentDidMount: function componentDidMount() {
+	        $.id('load').style.display = 'block';
+	        var opid = $.getCookie('opid'),
+	            token = $.getCookie('token'),
+	            base = btoa(opid + ':' + token),
+	            _this = this;
+
+	        reqwest({
+	            url: url + 'V1/carwar',
+	            method: 'get',
+	            data: {
+	                order_id: this.props.params.userId
+	            },
+	            headers: {
+	                'Authorization': 'Basic ' + base,
+	                'Accept': 'application/json, text/plain, */*'
+	            },
+	            success: function success(xrh) {
+	                console.log(xrh.list);
+	                _this.setState({
+	                    islist: true,
+	                    allfee: xrh.all_fee,
+	                    list: xrh.list
+	                });
+	                $.id('load').style.display = 'none';
+	            }
+	        });
+	    },
+	    closeClick: function closeClick(event) {
+	        var tar = event.currentTarget;
+	    },
+	    checkClick: function checkClick(event) {
+	        var only = document.getElementsByClassName('chs');
+	        for (var i = 0, len = only.length; i < len; i++) {
+	            only[i].style.color = '#e9e9e9';
+	        }
+	        var tar = event.currentTarget;
+
+	        tar.getElementsByTagName('i')[0].style.color = '#5A7CDD';
+	        var mon = tar.getElementsByTagName('span')[0].children[0].innerHTML;
+	        $.id('next').setAttribute('value', mon);
+	        this.setState({
+	            times: parseFloat(mon),
+	            istimes: true
+	        });
+	        setTimeout(function () {
+	            $.id('paylist').style.display = 'none';
+	        }, 200);
+	    },
+	    agreeClick: function agreeClick() {
+	        $.id('load').style.display = 'block';
+	        var _this = this;
+	        var type = $.id('next').getAttribute('value');
+	        var opid = $.getCookie('opid'),
+	            token = $.getCookie('token'),
+	            base = btoa(opid + ':' + token);
+	        reqwest({
+	            url: url + 'V1/fenqi',
+	            menthod: 'get',
+	            data: {
+	                type: type,
+	                order_id: _this.props.params.userId
+	            },
+	            headers: {
+	                'Authorization': 'Basic ' + base,
+	                'Accept': 'application/json, text/plain, */*'
+	            },
+	            success: function success(xrh) {
+	                if (xrh.code == 0) {
+	                    reqwest({
+	                        url: 'http://api.rongzhubao.cn/V1/wappay',
+	                        method: 'post',
+	                        dataType: 'jsonp',
+	                        data: {
+	                            order_id: _this.props.params.userId
+	                        },
+	                        headers: {
+	                            'Authorization': 'Basic ' + base,
+	                            'Accept': 'application/json, text/plain, */*'
+	                        },
+	                        success: function success(xrh) {
+	                            window.location.href = xrh;
+	                        }
+	                    });
+	                }
+	            },
+	            error: function error() {}
+
+	        });
+	    },
+	    closetoop: function closetoop() {
+	        var sr = document.getElementsByClassName('re-sr');
+	        for (var i = 0, len = sr.length; i < len; i++) {
+	            sr[i].style.display = 'none';
+	        }
+	    },
+	    toPay: function toPay(event) {
+	        var only = document.getElementsByClassName('only');
+	        for (var i = 0, len = only.length; i < len; i++) {
+	            only[i].style.color = '#e9e9e9';
+	        }
+	        var tar = event.currentTarget;
+	        tar.children[0].style.color = '#5A7CDD';
+
+	        var data = tar.getAttribute('data');
+
+	        $.id('next').setAttribute('data', data);
+	        if (data == '1') {
+	            $.id('paylist').style.display = 'block';
+	        }
+	    },
+	    takeOrder: function takeOrder(event) {
+	        var tar = event.currentTarget;
+	        var data = parseFloat(tar.getAttribute('data')),
+	            value = parseFloat(tar.getAttribute('value'));
+
+	        if (data == 1) {
+	            $.id('allrules').style.display = 'block';
+	        }
+	        if (data == 2) {
+	            $.id('allpays').style.display = 'block';
+	        }
+	    },
+	    blockrules: function blockrules(event) {
+	        var tar = event.currentTarget;
+	        this.setState({
+	            rule: tar.id,
+	            isrule: true
+	        });
+	        $.id('reSr').style.display = 'block';
+	    },
+	    ruleNone: function ruleNone() {
+	        $.id('reSr').style.display = 'none';
+	    },
+	    render: function render() {
+	        if (this.state.islist) {
+	            var list = this.state.list.map(function (item) {
+	                return React.createElement('li', { className: 'clearfix' }, React.createElement('span', { className: 'pull-left' }, item.name), React.createElement('b', { className: 'pull-right' }, item.prMon, '元'));
+	            });
+	            var all, mou, fq;
+	            if (this.state.istimes) {
+	                all = this.state.allfee;
+	                mou = this.state.times;
+
+	                fq = React.createElement('p', { className: 'pull-right' }, (parseFloat(all) / mou).toFixed(2), '元 x ', mou, '期=', all, '元');
+	            } else {
+	                all = this.state.allfee;
+	                mou = this.state.times;
+	                fq = React.createElement('p', { className: 'pull-right' }, (parseFloat(all) / parseFloat(mou)).toFixed(2), '元 x ', mou, '期=', all, '元');
+	            }
+	        }
+	        if (this.state.isrule) {
+	            var rule = React.createElement('iframe', { src: this.state.rule, frameborder: '0', width: '100%', height: '100%' });
+	        }
+	        return React.createElement('div', { className: 'or-de' }, React.createElement(Back, { url: '/imme/' + this.props.params.userId, tit: '信息审核' }), React.createElement('h4', { className: 'se-tit clearfix' }, React.createElement('span', { className: 'pull-left' }, '订单号'), React.createElement('b', { className: 'pull-right' }, this.props.params.userId)), React.createElement('ul', { className: 'eve-li' }, list), React.createElement('h4', { className: 'se-tit' }, '分期支付(0利息0手续0首付)'), React.createElement('ul', { className: 'eve-li' }, React.createElement('li', { className: 'clearfix', onTouchEnd: this.toPay, data: '1' }, React.createElement('i', { className: 'iconfont pull-left only', id: 'payable' }, ''), React.createElement('span', { className: 'pull-left' }, '分期支付'), React.createElement('i', { className: 'iconfont pull-right' }, ''), fq)), React.createElement(Link, { className: 'abtn', id: 'next', data: '0', value: '6', onTouchEnd: this.takeOrder }, '立即支付'), React.createElement('div', { className: 'fixed re-in', id: 'paylist', style: { display: 'none' } }, React.createElement('div', { className: 'or-dv' }, React.createElement('ul', { className: 'eve-li' }, times.map(function (item) {
+	            return React.createElement('li', { className: 'clearfix', onTouchEnd: this.checkClick }, React.createElement('span', { className: 'pull-left' }, React.createElement('span', null, item), '期'), React.createElement('i', { className: 'iconfont pull-right chs' }, ''));
+	        }, this)))), React.createElement('div', { className: 'fixed re-sr', id: 'allrules', style: { display: 'none' } }, React.createElement('div', { className: 're-dp' }, React.createElement('div', { className: 're-lp' }, React.createElement('h5', null, React.createElement('p', { className: 'buleColor', id: 'http://h5.rongzhubao.cn/rules1.html', onTouchEnd: this.blockrules }, '《分期车险退保须知》'), React.createElement('p', { className: 'buleColor', id: 'http://h5.rongzhubao.cn/rules2.html', onTouchEnd: this.blockrules }, '《分期且信》')), React.createElement('ul', { className: 'clearfix btnwp' }, React.createElement('li', { className: 'pull-left agree', id: 'close', onTouchEnd: this.closetoop }, '取消'), React.createElement('li', { className: 'pull-right', id: 'go', onTouchEnd: this.agreeClick }, '同意'))))), React.createElement('div', { className: 'fixed re-sr', id: 'reSr', style: { display: 'none' } }, React.createElement('div', { className: 're-dp' }, React.createElement('div', { className: 're-lp' }, React.createElement('h5', null, '《 条款内容 》'), React.createElement('div', { className: 'rules comstyle' }, React.createElement('ul', { style: { height: '100%' } }, React.createElement('li', { className: 'iframerool', style: { color: '#3d3d3e', height: '100%' } }, rule))), React.createElement('ul', { className: 'clearfix btnwp' }, React.createElement('li', { className: 'pull-left close', id: 'close', style: { width: '100%' }, onTouchEnd: this.ruleNone }, '确定'))))), React.createElement('div', { className: 'fixed re-sr', id: 'allpays', style: { display: 'none' } }, React.createElement('div', { className: 're-dp' }, React.createElement('div', { className: 're-lp' }, React.createElement('h4', null, '分期支付优惠多多,是否再考虑下分期支付呢'), React.createElement('ul', { className: 'clearfix btnwp' }, React.createElement('li', { className: 'pull-left agree', id: 'close', onTouchEnd: this.closetoop }, '返回分期'), React.createElement('li', { className: 'pull-right', id: 'go', onTouchEnd: this.agreeClick }, '继续支付'))))), React.createElement(Load, null));
+	    }
+	});
+	module.exports = Order;
+
+	/* REACT HOT LOADER */ }).call(this); } finally { if (true) { (function () { var foundReactClasses = module.hot.data && module.hot.data.foundReactClasses || false; if (module.exports && module.makeHot) { var makeExportsHot = __webpack_require__(228); if (makeExportsHot(module, __webpack_require__(69))) { foundReactClasses = true; } var shouldAcceptModule = true && foundReactClasses; if (shouldAcceptModule) { module.hot.accept(function (err) { if (err) { console.error("Cannot not apply hot update to " + "orde.js" + ": " + err.message); } }); } } module.hot.dispose(function (data) { data.makeHot = module.makeHot; data.foundReactClasses = foundReactClasses; }); })(); } }
+	/* WEBPACK VAR INJECTION */}.call(exports, __webpack_require__(4)(module)))
+
+/***/ },
+/* 252 */
+/***/ function(module, exports, __webpack_require__) {
+
+	/* WEBPACK VAR INJECTION */(function(module) {/* REACT HOT LOADER */ if (true) { (function () { var ReactHotAPI = __webpack_require__(5), RootInstanceProvider = __webpack_require__(13), ReactMount = __webpack_require__(15), React = __webpack_require__(69); module.makeHot = module.hot.data ? module.hot.data.makeHot : ReactHotAPI(function () { return RootInstanceProvider.getRootInstances(ReactMount); }, React); })(); } try { (function () {
+
+	/**
+	 * Created by gongchuangshidai on 16/11/3.
+	 */
+	'use strict';
+
+	var React = __webpack_require__(69);
+	var Back = __webpack_require__(241);
+
+	var _require = __webpack_require__(171);
+
+	var Router = _require.Router;
+	var Route = _require.Route;
+	var Link = _require.Link;
+	var browserHistory = _require.browserHistory;
+
+	var allWay = __webpack_require__(238);
+	var reqwest = __webpack_require__(235);
+	var url = __webpack_require__(237);
+	var Load = __webpack_require__(239);
+
+	var $ = new allWay();
+
+	var CheckMsg = React.createClass({
+	    displayName: 'CheckMsg',
+
+	    imgUrlget: function imgUrlget(event) {
+	        var tar = event.currentTarget;
+
+	        if (tar.value != '') {
+	            var data = tar.files;
+	            var formData = new FormData();
+	            formData.append('upfile', data[0]);
+	            reqwest({
+	                url: 'http://www.rongzhubao.cn/upload.php',
+	                method: 'post',
+	                data: formData,
+	                processData: false,
+	                contentType: false,
+	                success: function success(xrh) {
+	                    var xrh = eval('[' + xrh + ']');
+	                    console.log(xrh[0].img);
+
+	                    tar.parentNode.children[0].src = xrh[0].img;
+	                }
+	            });
+	        }
+	    },
+	    NextClick: function NextClick() {
+	        var card_img = $.id('card_img').getAttribute('src'),
+	            card_img2 = $.id('card_img2').getAttribute('src'),
+	            dri_img = $.id('dri_img').getAttribute('src'),
+	            dri_img2 = $.id('dri_img2').getAttribute('src'),
+	            bank_card = $.id('bank_card').value,
+	            order_id = this.props.params.userId;
+
+	        var opid = $.getCookie('opid'),
+	            token = $.getCookie('token'),
+	            base = btoa(opid + ':' + token);
+
+	        if (card_img == '') {
+	            alert('请上传身份证正面');
+	            return;
+	        }
+	        if (card_img2 == '') {
+	            alert('请上传身份证反面');
+	            return;
+	        }
+	        if (dri_img == '') {
+	            alert('请上传行驶证正本');
+	            return;
+	        }
+	        if (dri_img2 == '') {
+	            alert('请上传行驶证副本');
+	            return;
+	        }
+	        if (bank_card == '') {
+	            alert('请输入银行卡');
+	            return;
+	        }
+	        if (!$.bankCheck(bank_card)) {
+	            alert('请输入正确的银行卡号');
+	            return;
+	        }
+	        $.id('load').style.display = 'block';
+	        var data = {
+	            card_img: card_img,
+	            card_img2: card_img2,
+	            dri_img: dri_img,
+	            dri_img2: dri_img2,
+	            bank_card: bank_card,
+	            order_id: order_id
+	        };
+
+	        reqwest({
+	            url: url + 'V1/orderinfo',
+	            method: 'post',
+	            data: data,
+	            headers: {
+	                'Authorization': 'Basic ' + base,
+	                'Accept': 'application/json, text/plain, */*'
+	            },
+	            success: function success(xrh) {
+	                $.id('load').style.display = 'none';
+	                if (xrh.code == 0) {
+	                    browserHistory.push('/order/' + order_id);
+	                } else {
+	                    alert(xrh.msg);
+	                }
+	            },
+	            error: function error() {}
+	        });
+	    },
+	    render: function render() {
+	        var data = {};
+	        data.name = $.getCookie('userName');
+	        data.phone = $.getCookie('userPhone');
+	        data.idcard = $.getCookie('idcard');
+	        var userName = decodeURIComponent(data.name, 'utf-8');
+
+	        return React.createElement('div', { className: 'checkMsg' }, React.createElement(Back, { url: '/order/' + this.props.params.userId, tit: '信息审核' }), React.createElement('h4', { className: 'toops' }, '为了确保此次为您的本人操作，以及保险业务顺利办理，需要您按照提示，上传身份证正、反照以及您名下的常用借记卡；'), React.createElement('div', { className: 'ph-wp' }, React.createElement('ul', { className: 'clearfix ' }, React.createElement('li', { className: 'pull-left' }, React.createElement('div', { className: 'imgbox' }, React.createElement('img', { src: '', alt: '', id: 'card_img' }), React.createElement('input', { type: 'file', name: 'idcard1', className: 'comcss', onChange: this.imgUrlget })), React.createElement('p', null, '身份证正面')), React.createElement('li', { className: 'pull-left mid' }, React.createElement('div', { className: 'imgbox' }, React.createElement('img', { src: '', alt: '', id: 'card_img2' }), React.createElement('input', { type: 'file', name: 'idcard2', className: 'comcss', onChange: this.imgUrlget })), React.createElement('p', null, '身份证反面')), React.createElement('li', { className: 'pull-left' }, React.createElement('div', { className: 'imgbox' }, React.createElement('img', { src: '', alt: '', id: 'dri_img' }), React.createElement('input', { type: 'file', name: 'bank', className: 'comcss', onChange: this.imgUrlget })), React.createElement('p', null, '行驶证正本')), React.createElement('li', { className: 'pull-left mid' }, React.createElement('div', { className: 'imgbox' }, React.createElement('img', { src: '', alt: '', id: 'dri_img2' }), React.createElement('input', { type: 'file', name: 'bank', className: 'comcss', onChange: this.imgUrlget })), React.createElement('p', null, '行驶证副本'))), React.createElement('p', { style: { textAlign: 'center', lineHeight: '1.5rem', color: '#ccccc9' } }, '请上传小于1M/张的图片')), React.createElement('h4', { className: 'se-tit' }, '绑定常用借记卡'), React.createElement('ul', { className: 'eve-li' }, React.createElement('li', { className: 'clearfix' }, React.createElement('span', { className: 'pull-left' }, '姓名'), React.createElement('span', { className: 'pull-right' }, React.createElement('input', { type: 'text', placeholder: '姓名', value: userName }))), React.createElement('li', { className: 'clearfix' }, React.createElement('span', { className: 'pull-left' }, '身份证号'), React.createElement('span', { className: 'pull-right', style: { width: '70%' } }, React.createElement('input', { type: 'text', placeholder: '请输入身份证号', value: data.idcard, style: { width: '100%' } }))), React.createElement('li', { className: 'clearfix' }, React.createElement('span', { className: 'pull-left' }, '银行卡号'), React.createElement('span', { className: 'pull-right', style: { width: '70%' } }, React.createElement('input', { type: 'text', placeholder: '请输入银行卡号', id: 'bank_card', style: { width: '100%' } }))), React.createElement('li', { className: 'clearfix' }, React.createElement('span', { className: 'pull-left' }, '手机号'), React.createElement('span', { className: 'pull-right' }, React.createElement('input', { type: 'text', placeholder: '请输入手机号', value: data.phone })))), React.createElement(Link, { className: 'abtn', onTouchEnd: this.NextClick }, '提交审核'), React.createElement(Load, null));
+	    }
+	});
+	module.exports = CheckMsg;
+
+	/* REACT HOT LOADER */ }).call(this); } finally { if (true) { (function () { var foundReactClasses = module.hot.data && module.hot.data.foundReactClasses || false; if (module.exports && module.makeHot) { var makeExportsHot = __webpack_require__(228); if (makeExportsHot(module, __webpack_require__(69))) { foundReactClasses = true; } var shouldAcceptModule = true && foundReactClasses; if (shouldAcceptModule) { module.hot.accept(function (err) { if (err) { console.error("Cannot not apply hot update to " + "CheckMsg.js" + ": " + err.message); } }); } } module.hot.dispose(function (data) { data.makeHot = module.makeHot; data.foundReactClasses = foundReactClasses; }); })(); } }
+	/* WEBPACK VAR INJECTION */}.call(exports, __webpack_require__(4)(module)))
+
+/***/ },
+/* 253 */
+/***/ function(module, exports, __webpack_require__) {
+
+	/* WEBPACK VAR INJECTION */(function(module) {/* REACT HOT LOADER */ if (true) { (function () { var ReactHotAPI = __webpack_require__(5), RootInstanceProvider = __webpack_require__(13), ReactMount = __webpack_require__(15), React = __webpack_require__(69); module.makeHot = module.hot.data ? module.hot.data.makeHot : ReactHotAPI(function () { return RootInstanceProvider.getRootInstances(ReactMount); }, React); })(); } try { (function () {
+
+	/**
+	 * Created by gongchuangshidai on 16/11/8.
+	 */
+	'use strict';
+
+	var React = __webpack_require__(69);
+	var Back = __webpack_require__(241);
+	var allWay = __webpack_require__(238);
+	var $ = new allWay();
+
+	var Suc = React.createClass({
+	    displayName: 'Suc',
+
+	    render: function render() {
+	        return React.createElement('div', { style: { height: '100%', overflow: 'hidden' } }, React.createElement(Back, { url: '/?opid=' + $.getCookie('opid') + '&token=' + $.getCookie('token') + '&channel=' + $.getCookie('channel'), tit: '返回首页' }), React.createElement('div', { className: 'suc' }, React.createElement('h4', null, '提交成功'), React.createElement('p', null, '恭喜您提交成功！待审核完成后，融助保会尽快安排客服人员与您取得联系～')));
+	    }
+	});
+	module.exports = Suc;
+
+	/* REACT HOT LOADER */ }).call(this); } finally { if (true) { (function () { var foundReactClasses = module.hot.data && module.hot.data.foundReactClasses || false; if (module.exports && module.makeHot) { var makeExportsHot = __webpack_require__(228); if (makeExportsHot(module, __webpack_require__(69))) { foundReactClasses = true; } var shouldAcceptModule = true && foundReactClasses; if (shouldAcceptModule) { module.hot.accept(function (err) { if (err) { console.error("Cannot not apply hot update to " + "suc.js" + ": " + err.message); } }); } } module.hot.dispose(function (data) { data.makeHot = module.makeHot; data.foundReactClasses = foundReactClasses; }); })(); } }
 	/* WEBPACK VAR INJECTION */}.call(exports, __webpack_require__(4)(module)))
 
 /***/ }
