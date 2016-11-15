@@ -8,6 +8,9 @@
     </content>
     <orderEntry type="inheritedJdk" />
     <orderEntry type="sourceFolder" forTests="false" />
+<<<<<<< HEAD
     <orderEntry type="library" name="rongzhu node_modules" level="project" />
+=======
+>>>>>>> 92f1bc90c1094592a2666157ad4ccb909e1d0435
   </component>
 </module>
